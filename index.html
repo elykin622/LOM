@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>KhoMars Buy &amp; Sell</title>
+<title>KhoMars Buy & Sell</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -30,60 +30,56 @@ body { background:var(--bg); color:var(--text); padding-bottom:100px; line-heigh
 .hdr p { font-size:14px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; font-weight:700; }
 
 .main { padding:20px; max-width:500px; margin:0 auto; }
-.card { background:var(--s1); border-radius:var(--radius); padding:20px; border:1px solid var(--border); box-shadow:var(--shadow); margin-bottom:20px; }
 .stat-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:20px; }
-.stat { background:var(--s2); padding:16px; border-radius:12px; border:1px solid var(--border); text-align:center; }
+.stat { background:var(--s1); padding:16px; border-radius:12px; border:1px solid var(--border); text-align:center; box-shadow:var(--shadow); }
 .stat-val { font-size:20px; font-weight:800; display:block; }
 .stat-lbl { font-size:11px; color:var(--muted); text-transform:uppercase; font-weight:700; }
-.p-oling { color:var(--oling); } .p-lugit { color:var(--lugit); } .p-kape { color:var(--kape); } .p-mais { color:var(--mais); }
 
-.btn { display:inline-flex; align-items:center; justify-content:center; padding:14px 20px; border-radius:12px; border:none; font-weight:700; font-size:15px; cursor:pointer; transition:0.2s; width:100%; gap:8px; }
+.card { background:var(--s1); border-radius:var(--radius); padding:20px; border:1px solid var(--border); box-shadow:var(--shadow); margin-bottom:20px; }
+.grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.btn { display:inline-flex; align-items:center; justify-content:center; padding:14px; border-radius:12px; border:none; font-weight:700; font-size:14px; cursor:pointer; transition:0.2s; width:100%; gap:8px; }
 .btn-primary { background:var(--text); color:#fff; }
 .btn-outline { background:transparent; border:1.5px solid var(--border2); color:var(--text); }
-.btn-ghost { background:var(--s3); color:var(--muted2); font-size:13px; }
-.btn:active { transform:scale(0.98); opacity:0.8; }
+.btn-ghost { background:var(--s3); color:var(--muted2); font-size:12px; }
 
-.grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:10px; }
+/* TABS SYSTEM */
+.tabs { display:flex; gap:8px; overflow-x:auto; padding:4px 0 16px; scrollbar-width:none; -ms-overflow-style:none; }
+.tabs::-webkit-scrollbar { display:none; }
+.tab { padding:8px 16px; border-radius:20px; background:var(--s3); color:var(--muted2); font-size:13px; font-weight:700; white-space:nowrap; border:1px solid transparent; }
+.tab.active { background:var(--text); color:#fff; }
 
-/* Modal */
+/* MODAL */
 .modal { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(45,42,37,0.4); backdrop-filter:blur(4px); display:flex; align-items:flex-end; opacity:0; pointer-events:none; transition:0.3s; z-index:1000; }
 .modal.open { opacity:1; pointer-events:auto; }
 .modal-content { background:var(--s1); width:100%; border-radius:24px 24px 0 0; padding:24px; transform:translateY(100%); transition:0.3s cubic-bezier(0.2,1,0.3,1); max-height:90vh; overflow-y:auto; }
 .modal.open .modal-content { transform:translateY(0); }
-.modal-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
-.modal-header h2 { font-family:'Playfair Display',serif; font-size:22px; }
-.close { font-size:28px; color:var(--muted); }
-
 .form-group { margin-bottom:16px; }
-label { display:block; font-size:13px; font-weight:700; color:var(--muted2); margin-bottom:6px; margin-left:4px; }
-input, select, textarea { width:100%; padding:14px; border-radius:12px; border:1.5px solid var(--border); background:var(--s2); font-size:16px; font-weight:500; outline:none; -webkit-appearance:none; }
-input:focus { border-color:var(--text); }
+label { display:block; font-size:12px; font-weight:800; color:var(--muted); text-transform:uppercase; margin-bottom:6px; }
+input, select { width:100%; padding:14px; border-radius:12px; border:1.5px solid var(--border); background:var(--s2); font-size:16px; outline:none; }
 
-.report-section { margin-top:24px; }
-.report-section-title { font-size:12px; font-weight:800; color:var(--muted); text-transform:uppercase; margin-bottom:12px; border-bottom:1px solid var(--border); padding-bottom:4px; }
-table { width:100%; border-collapse:collapse; font-size:13px; }
+/* TABLES */
+.report-section { margin-top:20px; }
+.report-title { font-size:12px; font-weight:800; color:var(--muted); text-transform:uppercase; margin-bottom:10px; padding-bottom:4px; border-bottom:1px solid var(--border); }
+table { width:100%; border-collapse:collapse; font-size:13px; margin-bottom:20px; }
 td { padding:10px 4px; border-bottom:1px solid var(--border); }
 .num { text-align:right; font-weight:700; }
-.sync-badge { font-size: 10px; color: #2d8a60; font-weight: bold; margin-top: 4px; }
-
 </style>
 </head>
 <body onload="init()">
 
 <div class="hdr">
-  <p id="hdr-date">Loading...</p>
+  <p id="hdr-date"></p>
   <h1>LOM | Galingan App</h1>
-  <p>KhoMars Buy &amp; Sell Tracker</p>
+  <p>KhoMars Buy & Sell Tracker</p>
 </div>
 
 <div class="main">
   <div class="stat-grid">
-    <div class="stat"><span class="stat-lbl">Cash on Hand</span><span class="stat-val" id="cash-val">₱0.00</span></div>
-    <div class="stat"><span class="stat-lbl">Projected Profit</span><span class="stat-val" id="profit-val">₱0.00</span></div>
+    <div class="stat"><span class="stat-lbl">Cash on Hand</span><span class="stat-val" id="cash-val">₱0</span></div>
+    <div class="stat"><span class="stat-lbl">Total Profit</span><span class="stat-val" id="profit-val">₱0</span></div>
   </div>
 
   <div class="card">
-    <div class="stat-lbl" style="margin-bottom:10px">Quick Entry</div>
     <div class="grid">
       <button class="btn btn-primary" onclick="openModal('modal-p')">📥 Buy</button>
       <button class="btn btn-primary" onclick="openModal('modal-m')">📤 Sell</button>
@@ -92,83 +88,84 @@ td { padding:10px 4px; border-bottom:1px solid var(--border); }
     </div>
   </div>
 
-  <div id="report-container"></div>
-  
-  <button class="btn btn-ghost" style="margin-top:20px" onclick="clearData()">Reset Local History</button>
+  <div class="tabs" id="tab-list">
+    <div class="tab active" onclick="switchTab('Oling')">Oling</div>
+    <div class="tab" onclick="switchTab('Lugit')">Lugit</div>
+    <div class="tab" onclick="switchTab('Kape')">Kape</div>
+    <div class="tab" onclick="switchTab('Mais')">Mais</div>
+    <div class="tab" onclick="switchTab('Other')">Other</div>
+  </div>
+
+  <div id="report-view"></div>
+
+  <button class="btn btn-ghost" style="margin-top:20px; width:100%" onclick="window.print()">🖨️ Print Records</button>
 </div>
 
 <div id="modal-p" class="modal" onclick="closeOverlay(event,'modal-p')">
   <div class="modal-content">
-    <div class="modal-header"><h2>Record Purchase</h2><span class="close" onclick="closeModal('modal-p')">&times;</span></div>
+    <h3>Record Purchase</h3><br>
     <form id="form-p">
       <div class="form-group"><label>Date</label><input type="date" id="p-date" required></div>
       <div class="form-group"><label>Product</label>
-        <select id="p-prod" onchange="loadPriceMemory('p')" required>
-          <option value="Oling">Oling (Charcoal)</option>
-          <option value="Lugit">Lugit</option>
-          <option value="Kape">Kape</option>
-          <option value="Mais">Mais</option>
+        <select id="p-prod" onchange="loadLastPrice('p')" required>
+          <option value="Oling">Oling</option><option value="Lugit">Lugit</option><option value="Kape">Kape</option><option value="Mais">Mais</option>
         </select>
       </div>
       <div class="grid">
-        <div class="form-group"><label>Qty (kg/sack)</label><input type="number" id="p-qty" step="any" placeholder="0" required></div>
-        <div class="form-group"><label>Price / Unit</label><input type="number" id="p-price" step="any" placeholder="0" required></div>
+        <div class="form-group"><label>Qty</label><input type="number" id="p-qty" step="any" required></div>
+        <div class="form-group"><label>Price/Unit</label><input type="number" id="p-price" step="any" required></div>
       </div>
-      <button type="submit" class="btn btn-primary" id="btn-p">Save Purchase</button>
+      <button type="submit" class="btn btn-primary" id="btn-p">Save & Sync</button>
     </form>
   </div>
 </div>
 
 <div id="modal-m" class="modal" onclick="closeOverlay(event,'modal-m')">
   <div class="modal-content">
-    <div class="modal-header"><h2>Record Sale</h2><span class="close" onclick="closeModal('modal-m')">&times;</span></div>
+    <h3>Record Sale</h3><br>
     <form id="form-m">
       <div class="form-group"><label>Date</label><input type="date" id="m-date" required></div>
       <div class="form-group"><label>Product</label>
         <select id="m-prod" required>
-          <option value="Oling">Oling (Charcoal)</option>
-          <option value="Lugit">Lugit</option>
-          <option value="Kape">Kape</option>
-          <option value="Mais">Mais</option>
+          <option value="Oling">Oling</option><option value="Lugit">Lugit</option><option value="Kape">Kape</option><option value="Mais">Mais</option>
         </select>
       </div>
       <div class="grid">
-        <div class="form-group"><label>Qty Sold</label><input type="number" id="m-qty" step="any" required></div>
-        <div class="form-group"><label>Selling Price</label><input type="number" id="m-price" step="any" required></div>
+        <div class="form-group"><label>Qty</label><input type="number" id="m-qty" step="any" required></div>
+        <div class="form-group"><label>Price/Unit</label><input type="number" id="m-price" step="any" required></div>
       </div>
-      <button type="submit" class="btn btn-primary" id="btn-m">Save Sale</button>
+      <button type="submit" class="btn btn-primary" id="btn-m">Save & Sync</button>
     </form>
   </div>
 </div>
 
 <div id="modal-c" class="modal" onclick="closeOverlay(event,'modal-c')">
   <div class="modal-content">
-    <div class="modal-header"><h2>Add Capital</h2><span class="close" onclick="closeModal('modal-c')">&times;</span></div>
+    <h3>Add Capital</h3><br>
     <form id="form-c">
       <div class="form-group"><label>Date</label><input type="date" id="c-date" required></div>
       <div class="form-group"><label>Amount</label><input type="number" id="c-amt" required></div>
-      <div class="form-group"><label>Source / Notes</label><input type="text" id="c-note" placeholder="Optional"></div>
-      <button type="submit" class="btn btn-primary" id="btn-c">Add Capital</button>
+      <div class="form-group"><label>Note</label><input type="text" id="c-note" placeholder="Source"></div>
+      <button type="submit" class="btn btn-primary" id="btn-c">Save & Sync</button>
     </form>
   </div>
 </div>
 
 <div id="modal-e" class="modal" onclick="closeOverlay(event,'modal-e')">
   <div class="modal-content">
-    <div class="modal-header"><h2>Record Expense</h2><span class="close" onclick="closeModal('modal-e')">&times;</span></div>
+    <h3>Record Expense</h3><br>
     <form id="form-e">
       <div class="form-group"><label>Date</label><input type="date" id="e-date" required></div>
-      <div class="form-group"><label>Description</label><input type="text" id="e-desc" placeholder="Gas, Food, Labor, etc." required></div>
+      <div class="form-group"><label>Item</label><input type="text" id="e-desc" required></div>
       <div class="form-group"><label>Amount</label><input type="number" id="e-amt" required></div>
-      <button type="submit" class="btn btn-primary" id="btn-e">Save Expense</button>
+      <button type="submit" class="btn btn-primary" id="btn-e">Save & Sync</button>
     </form>
   </div>
 </div>
 
 <script>
-// ══════════ CONFIG ══════════
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxOY7SnibZJKWFWRB-X9H90hPiUFU_Q3cmvRxEGk3tNOq4-8GEjMsL6IJgW49kBvFNT/exec';
-
+let activeTab = 'Oling';
 let db = JSON.parse(localStorage.getItem('km4_db')) || { purchase:[], sell:[], capital:[], expense:[] };
 
 function save() {
@@ -176,137 +173,88 @@ function save() {
     hydrate();
 }
 
-// ══════════ GOOGLE SYNC ══════════
-async function syncToGoogle(type, data, buttonId) {
-    const btn = document.getElementById(buttonId);
-    const originalText = btn.innerHTML;
-    btn.disabled = true;
-    btn.innerHTML = "Syncing Online...";
-
-    const formData = new FormData();
-    formData.append('TransactionType', type);
-    for (let key in data) {
-        formData.append(key, data[key]);
-    }
-
-    try {
-        await fetch(SCRIPT_URL, { method: 'POST', body: formData });
-        console.log("Cloud Sync Successful");
-    } catch (e) {
-        console.error("Cloud Sync Failed", e);
-        alert("Saved locally, but could not sync to Google Sheets. Check your internet.");
-    } finally {
-        btn.disabled = false;
-        btn.innerHTML = originalText;
-    }
+async function sync(type, data, btnId) {
+    const btn = document.getElementById(btnId);
+    btn.disabled = true; btn.innerHTML = "Syncing...";
+    const fd = new FormData();
+    fd.append('TransactionType', type);
+    for(let k in data) fd.append(k, data[k]);
+    try { await fetch(SCRIPT_URL, { method: 'POST', body: fd }); }
+    catch(e) { alert("Local save only (Offline)"); }
+    finally { btn.disabled = false; btn.innerHTML = "Save & Sync"; }
 }
 
-// ══════════ ACTIONS ══════════
-document.getElementById('form-p').onsubmit = async (e) => {
+// FORM SUBMISSIONS
+document.getElementById('form-p').onsubmit = (e) => {
     e.preventDefault();
-    const entry = {
-        Date: document.getElementById('p-date').value,
-        Category: document.getElementById('p-prod').value,
-        Quantity: parseFloat(document.getElementById('p-qty').value),
-        Amount: parseFloat(document.getElementById('p-price').value),
-        Notes: "Purchase"
-    };
-    db.purchase.push(entry);
-    localStorage.setItem('km4_last_price_'+entry.Category, entry.Amount);
-    save();
-    closeModal('modal-p');
-    await syncToGoogle('Purchase', entry, 'btn-p');
+    const d = { Date:document.getElementById('p-date').value, Category:document.getElementById('p-prod').value, Quantity:parseFloat(document.getElementById('p-qty').value), Amount:parseFloat(document.getElementById('p-price').value), Notes:'Purchase' };
+    db.purchase.push(d); localStorage.setItem('last_p_'+d.Category, d.Amount);
+    save(); closeModal('modal-p'); sync('Purchase', d, 'btn-p');
 };
 
-document.getElementById('form-m').onsubmit = async (e) => {
+document.getElementById('form-m').onsubmit = (e) => {
     e.preventDefault();
-    const entry = {
-        Date: document.getElementById('m-date').value,
-        Category: document.getElementById('m-prod').value,
-        Quantity: parseFloat(document.getElementById('m-qty').value),
-        Amount: parseFloat(document.getElementById('m-price').value),
-        Notes: "Sale"
-    };
-    db.sell.push(entry);
-    save();
-    closeModal('modal-m');
-    await syncToGoogle('Sale', entry, 'btn-m');
+    const d = { Date:document.getElementById('m-date').value, Category:document.getElementById('m-prod').value, Quantity:parseFloat(document.getElementById('m-qty').value), Amount:parseFloat(document.getElementById('m-price').value), Notes:'Sale' };
+    db.sell.push(d); save(); closeModal('modal-m'); sync('Sale', d, 'btn-m');
 };
 
-document.getElementById('form-c').onsubmit = async (e) => {
+document.getElementById('form-c').onsubmit = (e) => {
     e.preventDefault();
-    const entry = {
-        Date: document.getElementById('c-date').value,
-        Category: "Capital",
-        Amount: parseFloat(document.getElementById('c-amt').value),
-        Notes: document.getElementById('c-note').value || "Initial Capital"
-    };
-    db.capital.push(entry);
-    save();
-    closeModal('modal-c');
-    await syncToGoogle('Capital', entry, 'btn-c');
+    const d = { Date:document.getElementById('c-date').value, Category:'Capital', Amount:parseFloat(document.getElementById('c-amt').value), Notes:document.getElementById('c-note').value };
+    db.capital.push(d); save(); closeModal('modal-c'); sync('Capital', d, 'btn-c');
 };
 
-document.getElementById('form-e').onsubmit = async (e) => {
+document.getElementById('form-e').onsubmit = (e) => {
     e.preventDefault();
-    const entry = {
-        Date: document.getElementById('e-date').value,
-        Category: "Expense",
-        Amount: parseFloat(document.getElementById('e-amt').value),
-        Notes: document.getElementById('e-desc').value
-    };
-    db.expense.push(entry);
-    save();
-    closeModal('modal-e');
-    await syncToGoogle('Expense', entry, 'btn-e');
+    const d = { Date:document.getElementById('e-date').value, Category:'Expense', Amount:parseFloat(document.getElementById('e-amt').value), Notes:document.getElementById('e-desc').value };
+    db.expense.push(d); save(); closeModal('modal-e'); sync('Expense', d, 'btn-e');
 };
 
-// ══════════ REFRESH UI ══════════
+function switchTab(t) {
+    activeTab = t;
+    document.querySelectorAll('.tab').forEach(el => el.classList.toggle('active', el.innerText === t));
+    hydrate();
+}
+
 function hydrate() {
-    let totalCap = db.capital.reduce((a,b)=>a+b.Amount,0);
-    let totalExp = db.expense.reduce((a,b)=>a+b.Amount,0);
-    let totalBuy = db.purchase.reduce((a,b)=>a+(b.Quantity*b.Amount),0);
-    let totalSell = db.sell.reduce((a,b)=>a+(b.Quantity*b.Amount),0);
-
-    const cash = totalCap + totalSell - totalBuy - totalExp;
-    document.getElementById('cash-val').textContent = '₱' + cash.toLocaleString();
-    document.getElementById('profit-val').textContent = '₱' + (totalSell - totalBuy - totalExp).toLocaleString();
+    const fmt = n => n.toLocaleString();
+    let cap = db.capital.reduce((a,b)=>a+b.Amount,0);
+    let exp = db.expense.reduce((a,b)=>a+b.Amount,0);
+    let buy = db.purchase.reduce((a,b)=>a+(b.Quantity*b.Amount),0);
+    let sell = db.sell.reduce((a,b)=>a+(b.Quantity*b.Amount),0);
     
-    renderReport();
+    document.getElementById('cash-val').innerText = '₱' + fmt(cap + sell - buy - exp);
+    document.getElementById('profit-val').innerText = '₱' + fmt(sell - buy - exp);
+
+    renderActiveTab();
 }
 
-function renderReport() {
-    const fmt = n => n.toLocaleString(undefined,{minimumFractionDigits:2});
-    let h = `<div class="report-section"><div class="report-section-title">Recent Transactions</div><table>`;
-    
-    // Show last 10 combined transactions
-    let all = [
-        ...db.purchase.map(x=>({...x, t:'Buy', val:x.Quantity*x.Amount})),
-        ...db.sell.map(x=>({...x, t:'Sell', val:x.Quantity*x.Amount})),
-        ...db.expense.map(x=>({...x, t:'Exp', val:x.Amount}))
-    ].sort((a,b)=>new Date(b.Date)-new Date(a.Date)).slice(0,10);
-
-    all.forEach(x => {
-        h += `<tr><td>${x.Date}<br><small>${x.t}: ${x.Category || x.Notes}</small></td><td class="num">₱${fmt(x.val)}</td></tr>`;
-    });
+function renderActiveTab() {
+    let h = `<div class="report-section"><div class="report-title">${activeTab} Inventory</div><table>`;
+    if(activeTab === 'Other') {
+        h += `<tr><td>Expenses</td><td class="num">₱${db.expense.reduce((a,b)=>a+b.Amount,0).toLocaleString()}</td></tr>`;
+        h += `<tr><td>Capital</td><td class="num">₱${db.capital.reduce((a,b)=>a+b.Amount,0).toLocaleString()}</td></tr>`;
+    } else {
+        const buys = db.purchase.filter(x => x.Category === activeTab);
+        const sells = db.sell.filter(x => x.Category === activeTab);
+        buys.forEach(x => h += `<tr><td>${x.Date} (Buy)<br><small>${x.Quantity} units</small></td><td class="num">₱${(x.Quantity*x.Amount).toLocaleString()}</td></tr>`);
+        sells.forEach(x => h += `<tr><td>${x.Date} (Sale)<br><small>${x.Quantity} units</small></td><td class="num">₱${(x.Quantity*x.Amount).toLocaleString()}</td></tr>`);
+    }
     h += `</table></div>`;
-    document.getElementById('report-container').innerHTML = h;
+    document.getElementById('report-view').innerHTML = h;
 }
 
-// ══════════ UTILS ══════════
 function openModal(id){ document.getElementById(id).classList.add('open'); }
 function closeModal(id){ document.getElementById(id).classList.remove('open'); }
 function closeOverlay(e,id){ if(e.target===document.getElementById(id))closeModal(id); }
 function today(){ return new Date().toISOString().split('T')[0]; }
-function loadPriceMemory(prefix){
-    const prod = document.getElementById(prefix+'-prod').value;
-    const last = localStorage.getItem('km4_last_price_'+prod);
-    if(last) document.getElementById(prefix+'-price').value = last;
+function loadLastPrice(p){
+    const prod = document.getElementById(p+'-prod').value;
+    const last = localStorage.getItem('last_p_'+prod);
+    if(last) document.getElementById(p+'-price').value = last;
 }
-function clearData(){ if(confirm("Clear local records? Cloud data stays safe.")) { localStorage.removeItem('km4_db'); location.reload(); }}
-
 function init() {
-    document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-PH',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
+    document.getElementById('hdr-date').innerText = new Date().toLocaleDateString('en-PH',{weekday:'short',month:'short',day:'numeric'});
     document.getElementById('p-date').value = today();
     document.getElementById('m-date').value = today();
     document.getElementById('c-date').value = today();
@@ -314,6 +262,5 @@ function init() {
     hydrate();
 }
 </script>
-
 </body>
 </html>
