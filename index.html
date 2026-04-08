@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>KhoMars Buy & Sell</title>
+<title>KhoMars Buy &amp; Sell</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -19,248 +19,1211 @@
   --oling:   #c47c1a; --oling-d:#fef6e7; --oling-b:#f5d9a0;
   --lugit:   #2d8a60; --lugit-d:#eaf6f0; --lugit-b:#a8dbc5;
   --kape:    #7a5230; --kape-d:#f5ede4;  --kape-b:#d4b49a;
-  --mais:    #d4a017; --mais-d:#fff9e6;  --mais-b:#f0d58c;
-  --radius:  16px;
-  --shadow:  0 4px 20px rgba(0,0,0,0.05);
+  --mais:    #c45a1a; --mais-d:#fef0e7;  --mais-b:#f5c4a0;
+  --green:   #2d7a4f; --green-d:#eaf5ef; --green-b:#a8d5be;
+  --red:     #b84040; --red-d:#fbeaea;   --red-b:#e8b0b0;
+  --blue:    #2a6fa8; --blue-d:#e8f2fb;  --blue-b:#a8ccee;
+  --gold:    #b8860a; --gold-d:#fdf5e0;  --gold-b:#f0d080;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+  --r:14px; --rsm:9px;
 }
-* { box-sizing:border-box; -webkit-tap-highlight-color:transparent; font-family:'Nunito',sans-serif; margin:0; padding:0; }
-body { background:var(--bg); color:var(--text); padding-bottom:100px; line-height:1.4; overflow-x:hidden; }
-.hdr { padding:30px 20px; text-align:center; background:var(--s1); border-bottom:1px solid var(--border); box-shadow:var(--shadow); }
-.hdr h1 { font-family:'Playfair Display',serif; font-size:28px; letter-spacing:-0.5px; margin-bottom:4px; }
-.hdr p { font-size:14px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; font-weight:700; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--text);font-family:'Nunito',sans-serif;font-size:15px;min-height:100vh;overscroll-behavior:none}
 
-.main { padding:20px; max-width:500px; margin:0 auto; }
-.stat-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:20px; }
-.stat { background:var(--s1); padding:16px; border-radius:12px; border:1px solid var(--border); text-align:center; box-shadow:var(--shadow); }
-.stat-val { font-size:20px; font-weight:800; display:block; }
-.stat-lbl { font-size:11px; color:var(--muted); text-transform:uppercase; font-weight:700; }
+/* HEADER */
+.hdr{background:var(--s1);border-bottom:1px solid var(--border);padding:12px 16px;position:sticky;top:0;z-index:90;display:flex;align-items:center;justify-content:space-between;box-shadow:var(--shadow-sm)}
+.hdr-logo{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--text)}
+.hdr-logo span{color:var(--oling)}
+.hdr-sub{font-size:10px;color:var(--muted);letter-spacing:.3px;text-transform:uppercase;margin-top:1px}
+.hdr-date{font-size:11px;color:var(--muted);text-align:right}
 
-.card { background:var(--s1); border-radius:var(--radius); padding:20px; border:1px solid var(--border); box-shadow:var(--shadow); margin-bottom:20px; }
-.grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-.btn { display:inline-flex; align-items:center; justify-content:center; padding:14px; border-radius:12px; border:none; font-weight:700; font-size:14px; cursor:pointer; transition:0.2s; width:100%; gap:8px; }
-.btn-primary { background:var(--text); color:#fff; }
-.btn-outline { background:transparent; border:1.5px solid var(--border2); color:var(--text); }
-.btn-ghost { background:var(--s3); color:var(--muted2); font-size:12px; }
+/* TABS */
+.tabs{display:flex;background:var(--s1);border-bottom:1px solid var(--border)}
+.tab{flex:1;padding:11px 6px;text-align:center;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .18s;white-space:nowrap;font-family:'Nunito',sans-serif}
+.tab.active{color:var(--oling);border-bottom-color:var(--oling)}
 
-/* TABS SYSTEM */
-.tabs { display:flex; gap:8px; overflow-x:auto; padding:4px 0 16px; scrollbar-width:none; -ms-overflow-style:none; }
-.tabs::-webkit-scrollbar { display:none; }
-.tab { padding:8px 16px; border-radius:20px; background:var(--s3); color:var(--muted2); font-size:13px; font-weight:700; white-space:nowrap; border:1px solid transparent; }
-.tab.active { background:var(--text); color:#fff; }
+/* VIEWS */
+.view{display:none;padding:14px 14px 90px;max-width:700px;margin:0 auto}
+.view.active{display:block}
+
+/* SECTION */
+.sec{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin:18px 0 9px}
+.sec:first-child{margin-top:2px}
+
+/* CARDS */
+.card{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow-sm)}
+
+/* KPI GRID */
+.kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:4px}
+.kpi{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:12px 13px;box-shadow:var(--shadow-sm)}
+.kpi.span2{grid-column:1/-1}
+.kpi.green{background:var(--green-d);border-color:var(--green-b)}
+.kpi.red{background:var(--red-d);border-color:var(--red-b)}
+.kpi.blue{background:var(--blue-d);border-color:var(--blue-b)}
+.kpi.gold{background:var(--gold-d);border-color:var(--gold-b)}
+.kpi-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;font-weight:700}
+.kpi-val{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;line-height:1}
+.kv-g{color:var(--green)}.kv-r{color:var(--red)}.kv-b{color:var(--blue)}.kv-o{color:var(--oling)}.kv-gold{color:var(--gold)}
+
+/* FORM BLOCK */
+.form-block{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:15px;margin-bottom:12px;box-shadow:var(--shadow-sm)}
+.form-block-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;margin-bottom:13px}
+.field{margin-bottom:10px}
+.field label{display:block;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;font-weight:700}
+.field input,.field select,.field textarea{width:100%;background:var(--s3);border:1.5px solid var(--border);border-radius:var(--rsm);padding:10px 12px;color:var(--text);font-family:'Nunito',sans-serif;font-size:14px;font-weight:600;outline:none;transition:border-color .15s;-webkit-appearance:none}
+.field input:focus,.field select:focus{border-color:var(--oling);background:#fff}
+.field select option{background:#fff}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px}
+
+/* INFO BARS */
+.info-bar{border-radius:var(--rsm);padding:9px 12px;font-size:13px;margin-bottom:9px;display:none}
+.info-bar.show{display:block}
+.info-bar.blue{background:var(--blue-d);border:1px solid var(--blue-b)}
+.info-bar.gold{background:var(--gold-d);border:1px solid var(--gold-b)}
+.info-bar.green{background:var(--green-d);border:1px solid var(--green-b)}
+.info-bar-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px}
+.info-bar.blue .info-bar-label{color:var(--blue)}
+.info-bar.gold .info-bar-label{color:var(--gold)}
+.info-bar.green .info-bar-label{color:var(--green)}
+.info-bar-val{font-weight:700;font-size:13px}
+
+/* PROGRESS BAR */
+.prog-wrap{margin-top:7px}
+.prog-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:4px;font-weight:600}
+.prog-bar{height:5px;background:var(--s3);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;border-radius:3px;transition:width .4s}
+
+/* CALC PREVIEW */
+.calc-prev{background:var(--green-d);border:1.5px solid var(--green-b);border-radius:var(--rsm);padding:10px 13px;margin:9px 0;display:none}
+.calc-prev.show{display:block}
+.calc-prev-label{font-size:10px;color:var(--green);text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px;font-weight:700}
+.calc-prev-val{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--green)}
+.calc-prev-note{font-size:11px;color:var(--muted);margin-top:2px}
+.calc-result{display:none;font-size:11px;font-weight:700;color:var(--green);margin-top:4px}
+.calc-result.show{display:block}
+.calc-result.err{color:var(--red)}
+
+/* BUTTONS */
+.btn{padding:10px 14px;border-radius:var(--rsm);border:none;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;text-align:center}
+.btn:hover{opacity:.88;transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn-full{width:100%;font-size:14px;padding:12px}
+.btn-primary{background:var(--oling);color:#fff}
+.btn-danger{background:var(--red-d);color:var(--red);border:1.5px solid var(--red-b)}
+.btn-ghost{background:var(--s3);color:var(--muted2);border:1.5px solid var(--border2)}
+.btn-green{background:var(--green-d);color:var(--green);border:1.5px solid var(--green-b)}
+.btn-cutoff{background:var(--gold-d);color:var(--gold);border:1.5px solid var(--gold-b)}
+.btn-blue{background:var(--blue-d);color:var(--blue);border:1.5px solid var(--blue-b)}
+.btn-sm{padding:7px 11px;font-size:12px;flex:1}
+
+/* BADGES */
+.badge{display:inline-block;padding:3px 9px;border-radius:6px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+.badge-oling{background:var(--oling-d);color:var(--oling);border:1px solid var(--oling-b)}
+.badge-lugit{background:var(--lugit-d);color:var(--lugit);border:1px solid var(--lugit-b)}
+.badge-kape{background:var(--kape-d);color:var(--kape);border:1px solid var(--kape-b)}
+.badge-mais{background:var(--mais-d);color:var(--mais);border:1px solid var(--mais-b)}
+
+/* STATUS */
+.status-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:700}
+.status-badge.open{background:var(--green-d);color:var(--green);border:1px solid var(--green-b)}
+.status-badge.closed{background:var(--s3);color:var(--muted);border:1px solid var(--border)}
+.status-badge.open::before{content:'';display:block;width:5px;height:5px;border-radius:50%;background:currentColor;animation:pulse 1.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* RECENT ENTRY CARD */
+.recent-card{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:12px 14px;margin-bottom:8px;box-shadow:var(--shadow-sm)}
+.recent-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+.recent-meta{font-size:11px;color:var(--muted);margin-top:3px;font-weight:600}
+.recent-amount{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;text-align:right}
+.recent-actions{display:flex;gap:6px;margin-top:10px}
+
+/* BATCH CARD */
+.batch-card{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);margin-bottom:10px;overflow:hidden;box-shadow:var(--shadow-sm)}
+.batch-head{padding:12px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none}
+.batch-head-left{display:flex;align-items:center;gap:10px}
+.batch-num{font-family:'Playfair Display',serif;font-size:15px;font-weight:700}
+.batch-sub{font-size:12px;color:var(--muted);margin-top:1px}
+.batch-toggle{color:var(--muted2);font-size:16px;transition:transform .2s}
+.batch-card.expanded .batch-toggle{transform:rotate(180deg)}
+.batch-body{display:none;border-top:1px solid var(--border)}
+.batch-card.expanded .batch-body{display:block}
+.batch-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+.bstat{background:var(--s2);padding:9px 11px}
+.bstat-l{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.3px;font-weight:700}
+.bstat-v{font-size:13px;font-weight:700;margin-top:2px}
+.pur-list{padding:10px 14px}
+.pur-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px}
+.pur-row:last-child{border-bottom:none}
+.pur-meta{font-size:11px;color:var(--muted);margin-top:1px;font-weight:600}
+.pur-btns{display:flex;gap:4px}
+.pur-btn{background:none;border:none;color:var(--muted);font-size:13px;cursor:pointer;padding:2px 5px;transition:color .15s}
+.pur-btn:hover{color:var(--red)}
+.pur-btn.edit:hover{color:var(--blue)}
+.sell-entries{padding:0 14px 10px}
+.sell-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px}
+.sell-row:last-child{border-bottom:none}
+.batch-actions{padding:10px 14px 13px;display:flex;gap:7px;flex-wrap:wrap}
+
+/* EXPENSE / CAPITAL CARD */
+.exp-card{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:12px 14px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;box-shadow:var(--shadow-sm)}
+.exp-cat{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;font-weight:700}
+.exp-desc{font-size:14px;font-weight:600;margin-top:1px}
+.exp-date-txt{font-size:11px;color:var(--muted);margin-top:2px}
+.exp-amount{font-family:'Playfair Display',serif;font-size:18px;font-weight:700}
+.icon-btn{background:none;border:none;color:var(--muted);cursor:pointer;font-size:15px;transition:color .15s;padding:4px}
+.icon-btn:hover{color:var(--red)}
 
 /* MODAL */
-.modal { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(45,42,37,0.4); backdrop-filter:blur(4px); display:flex; align-items:flex-end; opacity:0; pointer-events:none; transition:0.3s; z-index:1000; }
-.modal.open { opacity:1; pointer-events:auto; }
-.modal-content { background:var(--s1); width:100%; border-radius:24px 24px 0 0; padding:24px; transform:translateY(100%); transition:0.3s cubic-bezier(0.2,1,0.3,1); max-height:90vh; overflow-y:auto; }
-.modal.open .modal-content { transform:translateY(0); }
-.form-group { margin-bottom:16px; }
-label { display:block; font-size:12px; font-weight:800; color:var(--muted); text-transform:uppercase; margin-bottom:6px; }
-input, select { width:100%; padding:14px; border-radius:12px; border:1.5px solid var(--border); background:var(--s2); font-size:16px; outline:none; }
+.overlay{display:none;position:fixed;inset:0;background:rgba(60,50,40,.45);z-index:200;align-items:flex-end;justify-content:center;backdrop-filter:blur(2px)}
+.overlay.open{display:flex}
+.modal{background:var(--s1);border:1px solid var(--border);border-radius:20px 20px 0 0;padding:20px 16px 36px;width:100%;max-width:640px;max-height:88vh;overflow-y:auto;box-shadow:0 -4px 30px rgba(0,0,0,0.12)}
+.modal-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center}
+.modal-close{background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;line-height:1}
 
-/* TABLES */
-.report-section { margin-top:20px; }
-.report-title { font-size:12px; font-weight:800; color:var(--muted); text-transform:uppercase; margin-bottom:10px; padding-bottom:4px; border-bottom:1px solid var(--border); }
-table { width:100%; border-collapse:collapse; font-size:13px; margin-bottom:20px; }
-td { padding:10px 4px; border-bottom:1px solid var(--border); }
-.num { text-align:right; font-weight:700; }
+/* REPORT */
+.report-date-picker{display:flex;gap:9px;align-items:center;margin-bottom:14px}
+.report-date-picker input{flex:1;background:var(--s3);border:1.5px solid var(--border);border-radius:var(--rsm);padding:9px 12px;color:var(--text);font-family:'Nunito',sans-serif;font-size:14px;font-weight:600;outline:none}
+.report-date-picker input:focus{border-color:var(--oling)}
+.report-summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.rscard{background:var(--s3);border-radius:var(--rsm);padding:11px 13px;border:1px solid var(--border)}
+.rscard-l{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px;font-weight:700}
+.rscard-v{font-family:'Playfair Display',serif;font-size:18px;font-weight:700}
+.report-section{margin-bottom:18px}
+.report-section-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted2);margin-bottom:8px;padding-bottom:6px;border-bottom:1.5px solid var(--border)}
+.report-table{width:100%;border-collapse:collapse;font-size:12px}
+.report-table th{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;padding:5px 6px;text-align:left;border-bottom:1.5px solid var(--border);font-weight:700}
+.report-table td{padding:7px 6px;border-bottom:1px solid var(--border);vertical-align:middle;font-weight:600}
+.report-table tr:last-child td{border-bottom:none}
+.report-table .num{text-align:right}
+.report-total-row td{font-weight:700;color:var(--text);background:var(--s3)}
+
+/* FAB */
+.fab{position:fixed;bottom:20px;right:16px;z-index:80}
+.fab-btn{padding:12px 20px;border-radius:30px;border:none;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,0.15);transition:transform .15s;background:var(--blue);color:#fff}
+.fab-btn:hover{transform:translateY(-2px)}
+
+/* PILLS */
+.pills{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;margin-bottom:13px;padding-bottom:2px}
+.pills::-webkit-scrollbar{display:none}
+.pill{padding:5px 14px;border-radius:20px;border:1px solid var(--border2);background:var(--s1);color:var(--muted2);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .15s;font-family:'Nunito',sans-serif}
+.pill.active{background:var(--oling);color:#fff;border-color:var(--oling)}
+
+/* EMPTY */
+.empty{text-align:center;padding:36px 20px;color:var(--muted)}
+.empty-ico{font-size:34px;margin-bottom:8px}
+.empty p{font-size:13px;line-height:1.7;font-weight:600}
+
+hr.div{border:none;border-top:1px solid var(--border);margin:11px 0}
 </style>
 </head>
-<body onload="init()">
+<body>
 
-<div class="hdr">
-  <p id="hdr-date"></p>
-  <h1>LOM | Galingan App</h1>
-  <p>KhoMars Buy & Sell Tracker</p>
+<header class="hdr">
+  <div>
+    <div class="hdr-logo">KhoMars <span>Buy &amp; Sell</span></div>
+    <div class="hdr-sub">Business Tracker</div>
+  </div>
+  <div class="hdr-date" id="hdr-date"></div>
+</header>
+
+<nav class="tabs">
+  <div class="tab active" onclick="nav('overview')">📊 Overview</div>
+  <div class="tab" onclick="nav('input')">📥 Input</div>
+  <div class="tab" onclick="nav('records')">📋 Records</div>
+</nav>
+
+<!-- ══════════════════════ OVERVIEW ══════════════════════ -->
+<div class="view active" id="view-overview">
+  <div class="pills" id="period-pills">
+    <div class="pill active" onclick="setPeriod('all',this)">All Time</div>
+    <div class="pill" onclick="setPeriod('today',this)">Today</div>
+    <div class="pill" onclick="setPeriod('week',this)">This Week</div>
+    <div class="pill" onclick="setPeriod('month',this)">This Month</div>
+  </div>
+  <div class="kpi-grid" id="dash-kpis"></div>
+  <div class="sec">Breakdown by Product</div>
+  <div id="dash-products"></div>
 </div>
 
-<div class="main">
-  <div class="stat-grid">
-    <div class="stat"><span class="stat-lbl">Cash on Hand</span><span class="stat-val" id="cash-val">₱0</span></div>
-    <div class="stat"><span class="stat-lbl">Total Profit</span><span class="stat-val" id="profit-val">₱0</span></div>
-  </div>
+<!-- ══════════════════════ INPUT ══════════════════════ -->
+<div class="view" id="view-input">
 
-  <div class="card">
-    <div class="grid">
-      <button class="btn btn-primary" onclick="openModal('modal-p')">📥 Buy</button>
-      <button class="btn btn-primary" onclick="openModal('modal-m')">📤 Sell</button>
-      <button class="btn btn-outline" onclick="openModal('modal-c')">💰 Cap</button>
-      <button class="btn btn-outline" onclick="openModal('modal-e')">💸 Exp</button>
+  <!-- BATCH PURCHASE -->
+  <div class="form-block">
+    <div class="form-block-title">📥 Add Purchase <span style="font-size:12px;font-weight:600;color:var(--muted)">Oling / Lugit / Kape</span></div>
+    <div class="field">
+      <label>Product</label>
+      <select id="p-product" onchange="onProductChange()">
+        <option value="">— Select —</option>
+        <option value="oling">Oling</option>
+        <option value="lugit">Lugit</option>
+        <option value="kape">Kape</option>
+      </select>
     </div>
+    <div class="info-bar blue" id="batch-info">
+      <div class="info-bar-label">Active Batch</div>
+      <div class="info-bar-val" id="batch-info-text"></div>
+      <div class="prog-wrap" id="batch-prog-wrap">
+        <div class="prog-labels"><span id="prog-cur"></span><span id="prog-tgt"></span></div>
+        <div class="prog-bar"><div class="prog-fill" id="prog-fill"></div></div>
+      </div>
+    </div>
+    <div class="info-bar gold" id="no-batch-info">⚠️ No open batch — a new one will be started automatically.</div>
+    <div class="row2">
+      <div class="field"><label>Date</label><input type="date" id="p-date"></div>
+      <div class="field"><label>Time (optional)</label><input type="time" id="p-time"></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label>Kilos</label><input type="number" id="p-kilos" placeholder="0" step="0.01" oninput="calcPurchase()"></div>
+      <div class="field"><label>Buy Price / kg (₱)</label><input type="number" id="p-price" placeholder="0" step="0.01" oninput="calcPurchase()"></div>
+    </div>
+    <div class="calc-prev" id="p-calc-prev">
+      <div class="calc-prev-label">Total to Pay</div>
+      <div class="calc-prev-val" id="p-calc-val">₱0</div>
+      <div class="calc-prev-note" id="p-calc-note"></div>
+    </div>
+    <div class="field"><label>Supplier</label><input type="text" id="p-supplier" placeholder="e.g. Mang Andres"></div>
+    <div class="field"><label>Notes</label><input type="text" id="p-notes" placeholder="Optional"></div>
+    <button class="btn btn-primary btn-full" onclick="savePurchase()">SAVE PURCHASE</button>
   </div>
 
-  <div class="tabs" id="tab-list">
-    <div class="tab active" onclick="switchTab('Oling')">Oling</div>
-    <div class="tab" onclick="switchTab('Lugit')">Lugit</div>
-    <div class="tab" onclick="switchTab('Kape')">Kape</div>
-    <div class="tab" onclick="switchTab('Mais')">Mais</div>
-    <div class="tab" onclick="switchTab('Other')">Other</div>
+  <!-- MAIS INCOME -->
+  <div class="form-block">
+    <div class="form-block-title">🌽 Mais Income <span style="font-size:12px;font-weight:600;color:var(--muted)">Grind / Galing service</span></div>
+    <div class="row2">
+      <div class="field"><label>Date</label><input type="date" id="m-date"></div>
+      <div class="field"><label>Time (optional)</label><input type="time" id="m-time"></div>
+    </div>
+    <div class="field"><label>Amount Received (₱) — supports math e.g. 50*12</label>
+      <input type="text" inputmode="decimal" id="m-amount" placeholder="e.g. 50*12 or 600" oninput="evalMais()">
+    </div>
+    <div class="calc-result" id="m-calc-result"></div>
+    <div class="field"><label>Customer / Note</label><input type="text" id="m-note" placeholder="e.g. 12 sacks ni Juan"></div>
+    <button class="btn btn-full" style="background:var(--mais);color:#fff" onclick="saveMais()">SAVE MAIS INCOME</button>
   </div>
 
-  <div id="report-view"></div>
+  <!-- CAPITAL -->
+  <div class="form-block">
+    <div class="form-block-title">💵 Add Capital</div>
+    <div class="row2">
+      <div class="field"><label>Date</label><input type="date" id="c-date"></div>
+      <div class="field"><label>Amount (₱)</label><input type="number" id="c-amount" placeholder="0" step="0.01"></div>
+    </div>
+    <div class="field"><label>Note (optional)</label><input type="text" id="c-note" placeholder="e.g. Cash from bank"></div>
+    <button class="btn btn-full" style="background:var(--gold-d);color:var(--gold);border:1.5px solid var(--gold-b)" onclick="saveCapital()">ADD CAPITAL</button>
+  </div>
 
-  <button class="btn btn-ghost" style="margin-top:20px; width:100%" onclick="window.print()">🖨️ Print Records</button>
-</div>
-
-<div id="modal-p" class="modal" onclick="closeOverlay(event,'modal-p')">
-  <div class="modal-content">
-    <h3>Record Purchase</h3><br>
-    <form id="form-p">
-      <div class="form-group"><label>Date</label><input type="date" id="p-date" required></div>
-      <div class="form-group"><label>Product</label>
-        <select id="p-prod" onchange="loadLastPrice('p')" required>
-          <option value="Oling">Oling</option><option value="Lugit">Lugit</option><option value="Kape">Kape</option><option value="Mais">Mais</option>
+  <!-- EXPENSE -->
+  <div class="form-block">
+    <div class="form-block-title">💸 Add Expense</div>
+    <div class="row2">
+      <div class="field">
+        <label>Category</label>
+        <select id="e-cat">
+          <option value="">— Select —</option>
+          <option value="Salaries">Salaries</option>
+          <option value="Gas/Fuel">Gas / Fuel</option>
+          <option value="Parts/Repairs">Parts / Repairs</option>
+          <option value="Other">Other</option>
         </select>
       </div>
-      <div class="grid">
-        <div class="form-group"><label>Qty</label><input type="number" id="p-qty" step="any" required></div>
-        <div class="form-group"><label>Price/Unit</label><input type="number" id="p-price" step="any" required></div>
-      </div>
-      <button type="submit" class="btn btn-primary" id="btn-p">Save & Sync</button>
-    </form>
+      <div class="field"><label>Date</label><input type="date" id="e-date"></div>
+    </div>
+    <div class="field"><label>Description</label><input type="text" id="e-desc" placeholder="e.g. Sweldo ni Mang Ben"></div>
+    <div class="field"><label>Amount (₱) — supports math e.g. 250*5</label>
+      <input type="text" inputmode="decimal" id="e-amount" placeholder="e.g. 250*5 or 1500" oninput="evalExpense()">
+    </div>
+    <div class="calc-result" id="e-calc-result"></div>
+    <button class="btn btn-full" style="background:var(--red-d);color:var(--red);border:1.5px solid var(--red-b)" onclick="saveExpense()">SAVE EXPENSE</button>
+  </div>
+
+  <!-- RECENT ENTRIES -->
+  <div class="sec">Recent Purchases</div>
+  <div id="recent-purchases"></div>
+  <div class="sec">Recent Mais Income</div>
+  <div id="recent-mais"></div>
+  <div class="sec">Recent Expenses</div>
+  <div id="recent-expenses"></div>
+</div>
+
+<!-- ══════════════════════ RECORDS ══════════════════════ -->
+<div class="view" id="view-records">
+  <div class="pills" id="rec-pills">
+    <div class="pill active" onclick="setRecFilter('batches',this)">📦 Batches</div>
+    <div class="pill" onclick="setRecFilter('mais',this)">🌽 Mais</div>
+    <div class="pill" onclick="setRecFilter('expenses',this)">💸 Expenses</div>
+    <div class="pill" onclick="setRecFilter('capital',this)">💵 Capital</div>
+  </div>
+  <div id="records-body"></div>
+</div>
+
+<!-- FAB -->
+<div class="fab"><button class="fab-btn" onclick="openReport()">📋 Daily Report</button></div>
+
+<!-- SELL MODAL -->
+<div class="overlay" id="modal-sell" onclick="closeOverlay(event,'modal-sell')">
+  <div class="modal">
+    <div class="modal-title"><span>📤 Add Sell Entry</span><button class="modal-close" onclick="closeModal('modal-sell')">✕</button></div>
+    <div id="sell-modal-body"></div>
   </div>
 </div>
 
-<div id="modal-m" class="modal" onclick="closeOverlay(event,'modal-m')">
-  <div class="modal-content">
-    <h3>Record Sale</h3><br>
-    <form id="form-m">
-      <div class="form-group"><label>Date</label><input type="date" id="m-date" required></div>
-      <div class="form-group"><label>Product</label>
-        <select id="m-prod" required>
-          <option value="Oling">Oling</option><option value="Lugit">Lugit</option><option value="Kape">Kape</option><option value="Mais">Mais</option>
-        </select>
-      </div>
-      <div class="grid">
-        <div class="form-group"><label>Qty</label><input type="number" id="m-qty" step="any" required></div>
-        <div class="form-group"><label>Price/Unit</label><input type="number" id="m-price" step="any" required></div>
-      </div>
-      <button type="submit" class="btn btn-primary" id="btn-m">Save & Sync</button>
-    </form>
+<!-- EDIT PURCHASE MODAL -->
+<div class="overlay" id="modal-edit" onclick="closeOverlay(event,'modal-edit')">
+  <div class="modal">
+    <div class="modal-title"><span>✏️ Edit Purchase</span><button class="modal-close" onclick="closeModal('modal-edit')">✕</button></div>
+    <div id="edit-modal-body"></div>
   </div>
 </div>
 
-<div id="modal-c" class="modal" onclick="closeOverlay(event,'modal-c')">
-  <div class="modal-content">
-    <h3>Add Capital</h3><br>
-    <form id="form-c">
-      <div class="form-group"><label>Date</label><input type="date" id="c-date" required></div>
-      <div class="form-group"><label>Amount</label><input type="number" id="c-amt" required></div>
-      <div class="form-group"><label>Note</label><input type="text" id="c-note" placeholder="Source"></div>
-      <button type="submit" class="btn btn-primary" id="btn-c">Save & Sync</button>
-    </form>
-  </div>
-</div>
-
-<div id="modal-e" class="modal" onclick="closeOverlay(event,'modal-e')">
-  <div class="modal-content">
-    <h3>Record Expense</h3><br>
-    <form id="form-e">
-      <div class="form-group"><label>Date</label><input type="date" id="e-date" required></div>
-      <div class="form-group"><label>Item</label><input type="text" id="e-desc" required></div>
-      <div class="form-group"><label>Amount</label><input type="number" id="e-amt" required></div>
-      <button type="submit" class="btn btn-primary" id="btn-e">Save & Sync</button>
-    </form>
+<!-- REPORT MODAL -->
+<div class="overlay" id="modal-report" onclick="closeOverlay(event,'modal-report')">
+  <div class="modal">
+    <div class="modal-title"><span>📋 Daily Report</span><button class="modal-close" onclick="closeModal('modal-report')">✕</button></div>
+    <div class="report-date-picker">
+      <input type="date" id="report-date" onchange="renderReport()">
+      <button class="btn btn-ghost" onclick="renderReport()">Generate</button>
+    </div>
+    <div id="report-body"></div>
   </div>
 </div>
 
 <script>
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxOY7SnibZJKWFWRB-X9H90hPiUFU_Q3cmvRxEGk3tNOq4-8GEjMsL6IJgW49kBvFNT/exec';
-let activeTab = 'Oling';
-let db = JSON.parse(localStorage.getItem('km4_db')) || { purchase:[], sell:[], capital:[], expense:[] };
+// ══════════ STATE ══════════
+let batches=[], mais=[], expenses=[], capitals=[];
+let periodFilter='all', recFilter='batches', sellTargetId=null, editTargetBId=null, editTargetPId=null;
+const TARGET_KG={oling:20000,lugit:2000,kape:1000};
+const BATCH_PRODUCTS=['oling','lugit','kape'];
 
-function save() {
-    localStorage.setItem('km4_db', JSON.stringify(db));
-    hydrate();
+// ══════════ STORAGE ══════════
+function persist(){
+  try{
+    localStorage.setItem('km4_batches',JSON.stringify(batches));
+    localStorage.setItem('km4_mais',JSON.stringify(mais));
+    localStorage.setItem('km4_expenses',JSON.stringify(expenses));
+    localStorage.setItem('km4_capitals',JSON.stringify(capitals));
+    // Also save last selected product and price
+    const prod=document.getElementById('p-product').value;
+    const price=document.getElementById('p-price').value;
+    if(prod) localStorage.setItem('km4_last_product',prod);
+    if(price) localStorage.setItem('km4_last_price_'+prod,price);
+  }catch(e){}
 }
-
-async function sync(type, data, btnId) {
-    const btn = document.getElementById(btnId);
-    btn.disabled = true; btn.innerHTML = "Syncing...";
-    const fd = new FormData();
-    fd.append('TransactionType', type);
-    for(let k in data) fd.append(k, data[k]);
-    try { await fetch(SCRIPT_URL, { method: 'POST', body: fd }); }
-    catch(e) { alert("Local save only (Offline)"); }
-    finally { btn.disabled = false; btn.innerHTML = "Save & Sync"; }
-}
-
-// FORM SUBMISSIONS
-document.getElementById('form-p').onsubmit = (e) => {
-    e.preventDefault();
-    const d = { Date:document.getElementById('p-date').value, Category:document.getElementById('p-prod').value, Quantity:parseFloat(document.getElementById('p-qty').value), Amount:parseFloat(document.getElementById('p-price').value), Notes:'Purchase' };
-    db.purchase.push(d); localStorage.setItem('last_p_'+d.Category, d.Amount);
-    save(); closeModal('modal-p'); sync('Purchase', d, 'btn-p');
-};
-
-document.getElementById('form-m').onsubmit = (e) => {
-    e.preventDefault();
-    const d = { Date:document.getElementById('m-date').value, Category:document.getElementById('m-prod').value, Quantity:parseFloat(document.getElementById('m-qty').value), Amount:parseFloat(document.getElementById('m-price').value), Notes:'Sale' };
-    db.sell.push(d); save(); closeModal('modal-m'); sync('Sale', d, 'btn-m');
-};
-
-document.getElementById('form-c').onsubmit = (e) => {
-    e.preventDefault();
-    const d = { Date:document.getElementById('c-date').value, Category:'Capital', Amount:parseFloat(document.getElementById('c-amt').value), Notes:document.getElementById('c-note').value };
-    db.capital.push(d); save(); closeModal('modal-c'); sync('Capital', d, 'btn-c');
-};
-
-document.getElementById('form-e').onsubmit = (e) => {
-    e.preventDefault();
-    const d = { Date:document.getElementById('e-date').value, Category:'Expense', Amount:parseFloat(document.getElementById('e-amt').value), Notes:document.getElementById('e-desc').value };
-    db.expense.push(d); save(); closeModal('modal-e'); sync('Expense', d, 'btn-e');
-};
-
-function switchTab(t) {
-    activeTab = t;
-    document.querySelectorAll('.tab').forEach(el => el.classList.toggle('active', el.innerText === t));
-    hydrate();
-}
-
-function hydrate() {
-    const fmt = n => n.toLocaleString();
-    let cap = db.capital.reduce((a,b)=>a+b.Amount,0);
-    let exp = db.expense.reduce((a,b)=>a+b.Amount,0);
-    let buy = db.purchase.reduce((a,b)=>a+(b.Quantity*b.Amount),0);
-    let sell = db.sell.reduce((a,b)=>a+(b.Quantity*b.Amount),0);
-    
-    document.getElementById('cash-val').innerText = '₱' + fmt(cap + sell - buy - exp);
-    document.getElementById('profit-val').innerText = '₱' + fmt(sell - buy - exp);
-
-    renderActiveTab();
-}
-
-function renderActiveTab() {
-    let h = `<div class="report-section"><div class="report-title">${activeTab} Inventory</div><table>`;
-    if(activeTab === 'Other') {
-        h += `<tr><td>Expenses</td><td class="num">₱${db.expense.reduce((a,b)=>a+b.Amount,0).toLocaleString()}</td></tr>`;
-        h += `<tr><td>Capital</td><td class="num">₱${db.capital.reduce((a,b)=>a+b.Amount,0).toLocaleString()}</td></tr>`;
-    } else {
-        const buys = db.purchase.filter(x => x.Category === activeTab);
-        const sells = db.sell.filter(x => x.Category === activeTab);
-        buys.forEach(x => h += `<tr><td>${x.Date} (Buy)<br><small>${x.Quantity} units</small></td><td class="num">₱${(x.Quantity*x.Amount).toLocaleString()}</td></tr>`);
-        sells.forEach(x => h += `<tr><td>${x.Date} (Sale)<br><small>${x.Quantity} units</small></td><td class="num">₱${(x.Quantity*x.Amount).toLocaleString()}</td></tr>`);
+function hydrate(){
+  try{
+    batches  =JSON.parse(localStorage.getItem('km4_batches')  ||'[]');
+    mais     =JSON.parse(localStorage.getItem('km4_mais')     ||'[]');
+    expenses =JSON.parse(localStorage.getItem('km4_expenses') ||'[]');
+    capitals =JSON.parse(localStorage.getItem('km4_capitals') ||'[]');
+    // Migrate old data from previous version
+    const oldB=localStorage.getItem('nt3_batches');
+    const oldS=localStorage.getItem('nt3_simples');
+    const oldE=localStorage.getItem('nt3_expenses');
+    const oldC=localStorage.getItem('nt3_capitals');
+    if(oldB&&!batches.length) batches=JSON.parse(oldB||'[]');
+    if(oldS&&!mais.length){
+      const oldSimples=JSON.parse(oldS||'[]');
+      mais=oldSimples.filter(r=>r.product==='mais').map(r=>({id:r.id,date:r.date,time:'',amount:r.kilos*r.sellPrice,note:r.buyer||''}));
     }
-    h += `</table></div>`;
-    document.getElementById('report-view').innerHTML = h;
+    if(oldE&&!expenses.length) expenses=JSON.parse(oldE||'[]');
+    if(oldC&&!capitals.length) capitals=JSON.parse(oldC||'[]');
+  }catch(e){batches=[];mais=[];expenses=[];capitals=[];}
 }
 
-function openModal(id){ document.getElementById(id).classList.add('open'); }
-function closeModal(id){ document.getElementById(id).classList.remove('open'); }
-function closeOverlay(e,id){ if(e.target===document.getElementById(id))closeModal(id); }
-function today(){ return new Date().toISOString().split('T')[0]; }
-function loadLastPrice(p){
-    const prod = document.getElementById(p+'-prod').value;
-    const last = localStorage.getItem('last_p_'+prod);
-    if(last) document.getElementById(p+'-price').value = last;
+// ══════════ UTILS ══════════
+const uid   =()=>Date.now().toString(36)+Math.random().toString(36).slice(2,5);
+const cap   =s=>s.charAt(0).toUpperCase()+s.slice(1);
+const today =()=>new Date().toISOString().slice(0,10);
+const nowTime=()=>new Date().toTimeString().slice(0,5);
+
+function fmt(n){
+  if(n===null||n===undefined||isNaN(n))return'—';
+  return'₱'+Number(n).toLocaleString('en-PH',{minimumFractionDigits:2,maximumFractionDigits:2});
 }
-function init() {
-    document.getElementById('hdr-date').innerText = new Date().toLocaleDateString('en-PH',{weekday:'short',month:'short',day:'numeric'});
-    document.getElementById('p-date').value = today();
-    document.getElementById('m-date').value = today();
-    document.getElementById('c-date').value = today();
-    document.getElementById('e-date').value = today();
-    hydrate();
+function fkg(n){return Number(n).toLocaleString('en-PH',{minimumFractionDigits:2,maximumFractionDigits:2})+' kg';}
+function fdate(d){if(!d)return'—';return new Date(d+'T00:00:00').toLocaleDateString('en-PH',{month:'short',day:'numeric',year:'numeric'});}
+function fdatetime(d,t){return fdate(d)+(t?' '+t:'');}
+
+function batchTotals(b){
+  const kilos=b.purchases.reduce((s,p)=>s+Number(p.kilos),0);
+  const cost =b.purchases.reduce((s,p)=>s+p.kilos*p.price,0);
+  return{kilos,cost};
 }
+function batchProfit(b){
+  if(!b.sells||!b.sells.length)return null;
+  const{kilos,cost}=batchTotals(b);
+  const reject=Number(b.rejectPct)||0;
+  const sellable=kilos*(1-reject/100);
+  const revenue=b.sells.reduce((s,sl)=>s+(Number(sl.kilos)||sellable/b.sells.length)*sl.pricePerKg,0);
+  return revenue-cost;
+}
+
+function inPeriod(dateStr){
+  if(periodFilter==='all')return true;
+  const d=new Date(dateStr+'T00:00:00'),now=new Date();
+  if(periodFilter==='today')return dateStr===today();
+  if(periodFilter==='week'){const s=new Date(now);s.setDate(now.getDate()-now.getDay());s.setHours(0,0,0,0);return d>=s;}
+  if(periodFilter==='month')return d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear();
+  return true;
+}
+
+function evalExpr(raw){
+  if(!raw)return NaN;
+  if(!/^[\d\s\+\-\*\/\.\(\)]+$/.test(raw))return NaN;
+  try{const r=Function('"use strict";return('+raw+')')();return(typeof r==='number'&&isFinite(r)&&r>=0)?r:NaN;}
+  catch(e){return NaN;}
+}
+function evalExpense(){
+  const raw=document.getElementById('e-amount').value.trim();
+  const fb=document.getElementById('e-calc-result');
+  if(!raw){fb.classList.remove('show','err');return;}
+  if(!/^[\d\s\+\-\*\/\.\(\)]+$/.test(raw)){fb.textContent='⚠️ Only numbers and + - * / ( ) allowed';fb.className='calc-result show err';return;}
+  const r=evalExpr(raw);
+  if(isNaN(r)){fb.textContent='⚠️ Invalid expression';fb.className='calc-result show err';}
+  else{fb.textContent='= '+fmt(r);fb.className='calc-result show';}
+}
+function evalMais(){
+  const raw=document.getElementById('m-amount').value.trim();
+  const fb=document.getElementById('m-calc-result');
+  if(!raw){fb.classList.remove('show','err');return;}
+  if(!/^[\d\s\+\-\*\/\.\(\)]+$/.test(raw)){fb.textContent='⚠️ Only numbers and + - * / ( ) allowed';fb.className='calc-result show err';return;}
+  const r=evalExpr(raw);
+  if(isNaN(r)){fb.textContent='⚠️ Invalid expression';fb.className='calc-result show err';}
+  else{fb.textContent='= '+fmt(r);fb.className='calc-result show';}
+}
+
+// ══════════ NAV ══════════
+function nav(id){
+  document.querySelectorAll('.tab').forEach((el,i)=>el.classList.toggle('active',['overview','input','records'][i]===id));
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('view-'+id).classList.add('active');
+  if(id==='overview') renderOverview();
+  if(id==='input')    renderRecent();
+  if(id==='records')  renderRecords();
+}
+function setPeriod(p,el){periodFilter=p;document.querySelectorAll('#period-pills .pill').forEach(x=>x.classList.remove('active'));el.classList.add('active');renderOverview();}
+function setRecFilter(f,el){recFilter=f;document.querySelectorAll('#rec-pills .pill').forEach(x=>x.classList.remove('active'));el.classList.add('active');renderRecords();}
+
+// ══════════ OVERVIEW ══════════
+function renderOverview(){
+  const fB=batches.filter(b=>{const dates=b.purchases.map(p=>p.date).filter(Boolean);return dates.length?dates.some(d=>inPeriod(d)):inPeriod(b.createdAt||today());});
+  const fM=mais.filter(r=>inPeriod(r.date));
+  const fE=expenses.filter(e=>inPeriod(e.date));
+
+  let totalKilos=0,totalCost=0,totalBatchProfit=0;
+  fB.forEach(b=>{const t=batchTotals(b);totalKilos+=t.kilos;totalCost+=t.cost;const p=batchProfit(b);if(p!==null)totalBatchProfit+=p;});
+  const totalMaisIncome=fM.reduce((s,r)=>s+Number(r.amount),0);
+  const totalExp=fE.reduce((s,e)=>s+Number(e.amount),0);
+  const totalCapital=capitals.reduce((s,c)=>s+Number(c.amount),0);
+  const allPurchCost=batches.reduce((s,b)=>s+batchTotals(b).cost,0);
+  const remainingCash=totalCapital-allPurchCost-totalExp;
+  const grossProfit=totalBatchProfit+totalMaisIncome;
+  const net=grossProfit-totalExp;
+
+  // Product table rows
+  const prodRows=BATCH_PRODUCTS.map(key=>{
+    let kg=0,c=0;
+    fB.filter(b=>b.product===key).forEach(b=>{const t=batchTotals(b);kg+=t.kilos;c+=t.cost;});
+    if(kg===0&&c===0)return'';
+    return`<tr style="border-bottom:1px solid var(--border)">
+      <td style="padding:9px 13px"><span class="badge badge-${key}">${cap(key)}</span></td>
+      <td style="padding:9px 10px;text-align:right;font-weight:700;color:var(--${key})">${fkg(kg)}</td>
+      <td style="padding:9px 13px;text-align:right;font-weight:700">${fmt(c)}</td>
+    </tr>`;
+  }).join('');
+  const maisRow=totalMaisIncome>0?`<tr style="border-bottom:1px solid var(--border)">
+    <td style="padding:9px 13px"><span class="badge badge-mais">Mais</span></td>
+    <td style="padding:9px 10px;text-align:right;font-weight:700;color:var(--mais)">—</td>
+    <td style="padding:9px 13px;text-align:right;font-weight:700;color:var(--green)">${fmt(totalMaisIncome)} income</td>
+  </tr>`:'';
+  const totalCostAll=batches.filter(b=>{const dates=b.purchases.map(p=>p.date).filter(Boolean);return dates.length?dates.some(d=>inPeriod(d)):inPeriod(b.createdAt||today());}).reduce((s,b)=>s+batchTotals(b).cost,0);
+
+  document.getElementById('dash-kpis').innerHTML=`
+    <div class="kpi gold span2">
+      <div class="kpi-label">💵 Total Capital</div>
+      <div class="kpi-val kv-gold">${fmt(totalCapital)}</div>
+    </div>
+    <div class="kpi ${remainingCash>=0?'green':'red'} span2">
+      <div class="kpi-label">🏦 Remaining Cash</div>
+      <div class="kpi-val ${remainingCash>=0?'kv-g':'kv-r'}">${fmt(remainingCash)}</div>
+    </div>
+    <div class="kpi span2" style="padding:0;overflow:hidden">
+      <table style="width:100%;border-collapse:collapse;font-size:13px">
+        <thead><tr style="background:var(--s3)">
+          <th style="padding:9px 13px;text-align:left;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;font-weight:700;border-bottom:1px solid var(--border)">Product</th>
+          <th style="padding:9px 10px;text-align:right;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;font-weight:700;border-bottom:1px solid var(--border)">Total Kilos</th>
+          <th style="padding:9px 13px;text-align:right;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;font-weight:700;border-bottom:1px solid var(--border)">Buy Cost</th>
+        </tr></thead>
+        <tbody>
+          ${prodRows||'<tr><td colspan="3" style="padding:12px 13px;color:var(--muted);font-size:13px;font-weight:600">No data yet.</td></tr>'}
+          ${maisRow}
+          ${(prodRows||maisRow)?`<tr style="background:var(--s3)">
+            <td style="padding:9px 13px;font-weight:700;font-size:12px;color:var(--muted2)">TOTAL</td>
+            <td style="padding:9px 10px;text-align:right;font-weight:700">${fkg(totalKilos)}</td>
+            <td style="padding:9px 13px;text-align:right;font-weight:700">${fmt(totalCostAll)}</td>
+          </tr>`:''}
+        </tbody>
+      </table>
+    </div>
+    <div class="kpi blue"><div class="kpi-label">🌽 Mais Income</div><div class="kpi-val kv-b">${fmt(totalMaisIncome)}</div></div>
+    <div class="kpi blue"><div class="kpi-label">📈 Gross Profit</div><div class="kpi-val kv-b">${fmt(grossProfit)}</div></div>
+    <div class="kpi ${net>=0?'green':'red'} span2">
+      <div class="kpi-label">Net Profit (after expenses)</div>
+      <div class="kpi-val ${net>=0?'kv-g':'kv-r'}">${fmt(net)}</div>
+    </div>
+    <div class="kpi red"><div class="kpi-label">💸 Expenses</div><div class="kpi-val kv-r">${fmt(totalExp)}</div></div>
+    <div class="kpi"><div class="kpi-label">📦 Open Batches</div><div class="kpi-val kv-o">${batches.filter(b=>b.status==='open').length}</div></div>`;
+
+  // Per product detail cards
+  const pb=document.getElementById('dash-products');
+  pb.innerHTML='';
+  BATCH_PRODUCTS.forEach(key=>{
+    let kilos=0,cost=0,profit=0,count=0;
+    fB.filter(b=>b.product===key).forEach(b=>{const t=batchTotals(b);kilos+=t.kilos;cost+=t.cost;count+=b.purchases.length;const p=batchProfit(b);if(p!==null)profit+=p;});
+    if(!count&&kilos===0)return;
+    const openCount=batches.filter(b=>b.product===key&&b.status==='open').length;
+    pb.innerHTML+=`
+    <div class="recent-card" style="margin-bottom:9px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:9px">
+        <span class="badge badge-${key}">${cap(key)}</span>
+        <span style="font-size:11px;color:var(--muted);font-weight:600">${count} purchase${count!==1?'s':''} · ${openCount} open batch${openCount!==1?'es':''}</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:7px">
+        <div><div style="font-size:10px;color:var(--muted);text-transform:uppercase;font-weight:700">Total Kilos</div><div style="font-size:13px;font-weight:700;margin-top:2px;color:var(--${key})">${fkg(kilos)}</div></div>
+        <div><div style="font-size:10px;color:var(--muted);text-transform:uppercase;font-weight:700">Buy Cost</div><div style="font-size:13px;font-weight:700;margin-top:2px">${fmt(cost)}</div></div>
+        <div><div style="font-size:10px;color:var(--muted);text-transform:uppercase;font-weight:700">Gross Profit</div><div style="font-size:13px;font-weight:700;margin-top:2px;color:var(--green)">${profit===0?'Pending':fmt(profit)}</div></div>
+      </div>
+    </div>`;
+  });
+  if(totalMaisIncome>0){
+    pb.innerHTML+=`
+    <div class="recent-card" style="margin-bottom:9px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:9px">
+        <span class="badge badge-mais">Mais</span>
+        <span style="font-size:11px;color:var(--muted);font-weight:600">${fM.length} record${fM.length!==1?'s':''}</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px">
+        <div><div style="font-size:10px;color:var(--muted);text-transform:uppercase;font-weight:700">Total Income</div><div style="font-size:13px;font-weight:700;margin-top:2px;color:var(--green)">${fmt(totalMaisIncome)}</div></div>
+        <div><div style="font-size:10px;color:var(--muted);text-transform:uppercase;font-weight:700">Type</div><div style="font-size:13px;font-weight:700;margin-top:2px">Grind / Galing</div></div>
+      </div>
+    </div>`;
+  }
+  if(!pb.innerHTML) pb.innerHTML='<div class="empty"><div class="empty-ico">🌾</div><p>No data yet.<br>Add a purchase in the Input tab.</p></div>';
+}
+
+// ══════════ PRODUCT CHANGE (price memory + batch info) ══════════
+function onProductChange(){
+  const prod=document.getElementById('p-product').value;
+  if(!prod){
+    document.getElementById('batch-info').classList.remove('show');
+    document.getElementById('no-batch-info').classList.remove('show');
+    document.getElementById('p-price').value='';
+    document.getElementById('p-calc-prev').classList.remove('show');
+    return;
+  }
+  // Auto-fill last price for this product — no click needed
+  const lastPrice=localStorage.getItem('km4_last_price_'+prod);
+  if(lastPrice){
+    document.getElementById('p-price').value=lastPrice;
+    calcPurchase();
+  } else {
+    document.getElementById('p-price').value='';
+    document.getElementById('p-calc-prev').classList.remove('show');
+  }
+  // Batch info
+  const b=getActiveBatch(prod);
+  if(b){
+    const{kilos}=batchTotals(b);
+    const target=TARGET_KG[prod];
+    const pct=Math.min(100,(kilos/target)*100);
+    document.getElementById('batch-info-text').textContent=`Batch #${b.num} — ${fkg(kilos)} accumulated`;
+    document.getElementById('prog-cur').textContent=fkg(kilos);
+    document.getElementById('prog-tgt').textContent='Target: '+fkg(target);
+    document.getElementById('prog-fill').style.width=pct+'%';
+    document.getElementById('prog-fill').style.background=`var(--${prod})`;
+    document.getElementById('batch-info').classList.add('show');
+    document.getElementById('no-batch-info').classList.remove('show');
+  } else {
+    document.getElementById('batch-info').classList.remove('show');
+    document.getElementById('no-batch-info').classList.add('show');
+  }
+}
+
+function calcPurchase(){
+  const kilos=parseFloat(document.getElementById('p-kilos').value)||0;
+  const price=parseFloat(document.getElementById('p-price').value)||0;
+  const prev=document.getElementById('p-calc-prev');
+  if(!kilos||!price){prev.classList.remove('show');return;}
+  const total=kilos*price;
+  document.getElementById('p-calc-val').textContent=fmt(total);
+  document.getElementById('p-calc-note').textContent=`${fkg(kilos)} × ${fmt(price)}/kg`;
+  prev.classList.add('show');
+}
+
+// ══════════ SAVE PURCHASE ══════════
+function getActiveBatch(product){return batches.find(b=>b.product===product&&b.status==='open');}
+
+function savePurchase(){
+  const prod    =document.getElementById('p-product').value;
+  const date    =document.getElementById('p-date').value;
+  const time    =document.getElementById('p-time').value;
+  const kilos   =parseFloat(document.getElementById('p-kilos').value);
+  const price   =parseFloat(document.getElementById('p-price').value);
+  const supplier=document.getElementById('p-supplier').value.trim();
+  const notes   =document.getElementById('p-notes').value.trim();
+  if(!prod||!date||!kilos||!price){alert('Please fill in Product, Date, Kilos, and Price.');return;}
+
+  // Save last price for this product
+  localStorage.setItem('km4_last_price_'+prod,price);
+  localStorage.setItem('km4_last_product',prod);
+
+  let batch=getActiveBatch(prod);
+  if(!batch){
+    const nums=batches.filter(b=>b.product===prod).map(b=>b.num);
+    const nextNum=nums.length?Math.max(...nums)+1:1;
+    batch={id:uid(),product:prod,num:nextNum,status:'open',createdAt:today(),purchases:[],sells:[],rejectPct:''};
+    batches.push(batch);
+  }
+  batch.purchases.push({id:uid(),date,time,kilos,price,supplier,notes});
+  persist();
+
+  // Reset form but keep product and price for fast repeat entry
+  document.getElementById('p-date').value=today();
+  document.getElementById('p-time').value='';
+  document.getElementById('p-kilos').value='';
+  document.getElementById('p-supplier').value='';
+  document.getElementById('p-notes').value='';
+  document.getElementById('p-calc-prev').classList.remove('show');
+  // Refresh batch info
+  onProductChange();
+  alert('✅ Purchase saved to '+cap(prod)+' Batch #'+batch.num);
+  renderRecent();
+  renderOverview();
+}
+
+// ══════════ EDIT PURCHASE ══════════
+function openEditPurchase(bId,pId){
+  editTargetBId=bId; editTargetPId=pId;
+  const b=batches.find(x=>x.id===bId);
+  const p=b?b.purchases.find(x=>x.id===pId):null;
+  if(!b||!p)return;
+  document.getElementById('edit-modal-body').innerHTML=`
+    <div style="font-size:13px;color:var(--muted);margin-bottom:12px;font-weight:600">
+      <span class="badge badge-${b.product}">${cap(b.product)}</span> Batch #${b.num}
+    </div>
+    <div class="row2">
+      <div class="field"><label>Date</label><input type="date" id="ed-date" value="${p.date}"></div>
+      <div class="field"><label>Time</label><input type="time" id="ed-time" value="${p.time||''}"></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label>Kilos</label><input type="number" id="ed-kilos" value="${p.kilos}" step="0.01"></div>
+      <div class="field"><label>Buy Price / kg (₱)</label><input type="number" id="ed-price" value="${p.price}" step="0.01"></div>
+    </div>
+    <div class="field"><label>Supplier</label><input type="text" id="ed-supplier" value="${p.supplier||''}"></div>
+    <div class="field"><label>Notes</label><input type="text" id="ed-notes" value="${p.notes||''}"></div>
+    <button class="btn btn-primary btn-full" onclick="saveEditPurchase()">SAVE CHANGES</button>`;
+  document.getElementById('modal-edit').classList.add('open');
+}
+function saveEditPurchase(){
+  const b=batches.find(x=>x.id===editTargetBId);
+  if(!b)return;
+  const pi=b.purchases.findIndex(x=>x.id===editTargetPId);
+  if(pi<0)return;
+  const date    =document.getElementById('ed-date').value;
+  const time    =document.getElementById('ed-time').value;
+  const kilos   =parseFloat(document.getElementById('ed-kilos').value);
+  const price   =parseFloat(document.getElementById('ed-price').value);
+  const supplier=document.getElementById('ed-supplier').value.trim();
+  const notes   =document.getElementById('ed-notes').value.trim();
+  if(!date||!kilos||!price){alert('Please fill in Date, Kilos, and Price.');return;}
+  b.purchases[pi]={...b.purchases[pi],date,time,kilos,price,supplier,notes};
+  persist();
+  closeModal('modal-edit');
+  renderRecent();
+  renderRecords();
+  renderOverview();
+  alert('✅ Purchase updated!');
+}
+
+// ══════════ SAVE MAIS ══════════
+function saveMais(){
+  const date  =document.getElementById('m-date').value;
+  const time  =document.getElementById('m-time').value;
+  const raw   =document.getElementById('m-amount').value.trim();
+  const note  =document.getElementById('m-note').value.trim();
+  const amount=evalExpr(raw);
+  if(!date||isNaN(amount)||amount<=0){alert('Please fill in Date and a valid Amount.');return;}
+  mais.push({id:uid(),date,time,amount,note});
+  persist();
+  document.getElementById('m-date').value=today();
+  document.getElementById('m-time').value='';
+  document.getElementById('m-amount').value='';
+  document.getElementById('m-note').value='';
+  document.getElementById('m-calc-result').classList.remove('show','err');
+  alert('✅ Mais income saved!');
+  renderRecent();
+  renderOverview();
+}
+
+// ══════════ SAVE CAPITAL ══════════
+function saveCapital(){
+  const date  =document.getElementById('c-date').value;
+  const amount=parseFloat(document.getElementById('c-amount').value);
+  const note  =document.getElementById('c-note').value.trim();
+  if(!date||!amount){alert('Please fill in Date and Amount.');return;}
+  capitals.push({id:uid(),date,amount,note});
+  persist();
+  document.getElementById('c-date').value=today();
+  document.getElementById('c-amount').value='';
+  document.getElementById('c-note').value='';
+  alert('✅ Capital added!');
+  renderOverview();
+}
+
+// ══════════ SAVE EXPENSE ══════════
+function saveExpense(){
+  const cat   =document.getElementById('e-cat').value;
+  const date  =document.getElementById('e-date').value;
+  const desc  =document.getElementById('e-desc').value.trim();
+  const raw   =document.getElementById('e-amount').value.trim();
+  const amount=evalExpr(raw);
+  if(!cat||!date||isNaN(amount)||amount<=0){alert('Please fill in Category, Date, and a valid Amount.');return;}
+  expenses.push({id:uid(),category:cat,date,desc,amount});
+  persist();
+  document.getElementById('e-cat').value='';
+  document.getElementById('e-date').value=today();
+  document.getElementById('e-desc').value='';
+  document.getElementById('e-amount').value='';
+  document.getElementById('e-calc-result').classList.remove('show','err');
+  alert('✅ Expense saved!');
+  renderRecent();
+  renderOverview();
+}
+
+// ══════════ RECENT ENTRIES ══════════
+function renderRecent(){
+  // Recent purchases — last 5 across all batches
+  const allPurchases=[];
+  batches.forEach(b=>b.purchases.forEach(p=>allPurchases.push({...p,batchId:b.id,batchNum:b.num,product:b.product,batchOpen:b.status==='open'})));
+  allPurchases.sort((a,b)=>((b.date+b.time||'')>(a.date+a.time||''))?1:-1);
+  const rp=document.getElementById('recent-purchases');
+  if(!allPurchases.length){rp.innerHTML='<div class="empty" style="padding:20px"><div class="empty-ico">📭</div><p>No purchases yet.</p></div>';return;}
+  rp.innerHTML=allPurchases.slice(0,5).map(p=>`
+    <div class="recent-card">
+      <div class="recent-top">
+        <div>
+          <span class="badge badge-${p.product}">${cap(p.product)} Batch #${p.batchNum}</span>
+          <div class="recent-meta">${fdatetime(p.date,p.time)} · ${p.supplier||'—'}</div>
+        </div>
+        <div>
+          <div class="recent-amount">${fmt(p.kilos*p.price)}</div>
+          <div style="font-size:11px;color:var(--muted);text-align:right;font-weight:600">${fkg(p.kilos)} · ${fmt(p.price)}/kg</div>
+        </div>
+      </div>
+      <div class="recent-actions">
+        <button class="btn btn-sm btn-blue" onclick="openEditPurchase('${p.batchId}','${p.id}')">✏️ Edit</button>
+        <button class="btn btn-sm btn-danger" onclick="deletePurchase('${p.batchId}','${p.id}')">🗑 Delete</button>
+      </div>
+    </div>`).join('');
+
+  // Recent mais
+  const rm=document.getElementById('recent-mais');
+  const sortedMais=[...mais].sort((a,b)=>((b.date+b.time||'')>(a.date+a.time||''))?1:-1);
+  if(!sortedMais.length){rm.innerHTML='<div class="empty" style="padding:20px"><div class="empty-ico">📭</div><p>No mais income yet.</p></div>';return;}
+  rm.innerHTML=sortedMais.slice(0,5).map(r=>`
+    <div class="recent-card">
+      <div class="recent-top">
+        <div>
+          <span class="badge badge-mais">Mais Income</span>
+          <div class="recent-meta">${fdatetime(r.date,r.time)}${r.note?' · '+r.note:''}</div>
+        </div>
+        <div class="recent-amount" style="color:var(--green)">${fmt(r.amount)}</div>
+      </div>
+      <div class="recent-actions">
+        <button class="btn btn-sm btn-danger" onclick="deleteMais('${r.id}')">🗑 Delete</button>
+      </div>
+    </div>`).join('');
+
+  // Recent expenses
+  const re=document.getElementById('recent-expenses');
+  const sortedExp=[...expenses].sort((a,b)=>(b.date>a.date?1:-1));
+  if(!sortedExp.length){re.innerHTML='<div class="empty" style="padding:20px"><div class="empty-ico">📭</div><p>No expenses yet.</p></div>';return;}
+  re.innerHTML=sortedExp.slice(0,5).map(e=>`
+    <div class="recent-card">
+      <div class="recent-top">
+        <div>
+          <div style="font-weight:700">${e.desc||e.category}</div>
+          <div class="recent-meta">${e.category} · ${fdate(e.date)}</div>
+        </div>
+        <div class="recent-amount" style="color:var(--red)">${fmt(e.amount)}</div>
+      </div>
+      <div class="recent-actions">
+        <button class="btn btn-sm btn-danger" onclick="deleteExpense('${e.id}')">🗑 Delete</button>
+      </div>
+    </div>`).join('');
+}
+
+// ══════════ RECORDS TAB ══════════
+function renderRecords(){
+  const el=document.getElementById('records-body');
+  if(recFilter==='batches')  renderBatchRecords(el);
+  if(recFilter==='mais')     renderMaisRecords(el);
+  if(recFilter==='expenses') renderExpenseRecords(el);
+  if(recFilter==='capital')  renderCapitalRecords(el);
+}
+
+function renderBatchRecords(el){
+  const data=[...batches].reverse();
+  if(!data.length){el.innerHTML='<div class="empty"><div class="empty-ico">📦</div><p>No batches yet.</p></div>';return;}
+  el.innerHTML=data.map(b=>{
+    const{kilos,cost}=batchTotals(b);
+    const profit=batchProfit(b);
+    const isOpen=b.status==='open';
+    const target=TARGET_KG[b.product];
+    const pct=Math.min(100,(kilos/target)*100);
+    const sells=b.sells||[];
+    const purRows=b.purchases.map(p=>`
+      <div class="pur-row">
+        <div>
+          <div style="font-weight:700">${fkg(p.kilos)}</div>
+          <div class="pur-meta">${fdatetime(p.date,p.time)} · ${p.supplier||'—'}</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-weight:700;font-size:13px">${fmt(p.kilos*p.price)}</div>
+          <div style="font-size:11px;color:var(--muted);font-weight:600">${fmt(p.price)}/kg</div>
+        </div>
+        <div class="pur-btns">
+          <button class="pur-btn edit" onclick="openEditPurchase('${b.id}','${p.id}')">✏️</button>
+          ${isOpen?`<button class="pur-btn" onclick="deletePurchase('${b.id}','${p.id}')">✕</button>`:''}
+        </div>
+      </div>`).join('');
+    const sellRows=sells.length?sells.map(sl=>`
+      <div class="sell-row">
+        <div>
+          <div style="font-weight:700">${sl.company||'—'}</div>
+          <div style="font-size:11px;color:var(--muted);font-weight:600">${fdate(sl.date)}${sl.kilos?' · '+fkg(sl.kilos):''}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px">
+          <div style="font-size:13px;font-weight:700">${fmt(sl.pricePerKg)}/kg</div>
+          <button class="pur-btn" onclick="deleteSell('${b.id}','${sl.id}')">✕</button>
+        </div>
+      </div>`).join(''):'';
+    return`
+    <div class="batch-card" id="bc-${b.id}">
+      <div class="batch-head" onclick="toggleBatch('${b.id}')">
+        <div class="batch-head-left">
+          <span class="badge badge-${b.product}">${cap(b.product)}</span>
+          <div>
+            <div class="batch-num">Batch #${b.num}</div>
+            <div class="batch-sub">${fkg(kilos)} · ${b.purchases.length} purchase${b.purchases.length!==1?'s':''}</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:7px">
+          <span class="status-badge ${isOpen?'open':'closed'}">${isOpen?'Open':'Closed'}</span>
+          <span class="batch-toggle">▾</span>
+        </div>
+      </div>
+      <div class="batch-body">
+        <div class="batch-stats">
+          <div class="bstat"><div class="bstat-l">Total Kilos</div><div class="bstat-v" style="color:var(--${b.product})">${fkg(kilos)}</div></div>
+          <div class="bstat"><div class="bstat-l">Buy Cost</div><div class="bstat-v">${fmt(cost)}</div></div>
+          <div class="bstat"><div class="bstat-l">Net Profit</div><div class="bstat-v" style="color:${profit===null?'var(--muted)':profit>=0?'var(--green)':'var(--red)'}">${profit===null?'Pending':fmt(profit)}</div></div>
+        </div>
+        ${isOpen?`<div style="padding:8px 14px 4px">
+          <div class="prog-labels"><span>${fkg(kilos)}</span><span style="color:var(--muted)">Target: ${fkg(target)}</span></div>
+          <div class="prog-bar"><div class="prog-fill" style="width:${pct}%;background:var(--${b.product})"></div></div>
+        </div>`:''}
+        ${b.rejectPct!==undefined&&b.rejectPct!==''?`<div style="padding:5px 14px 0;font-size:12px;color:var(--muted);font-weight:600">Reject: <b style="color:var(--oling)">${b.rejectPct}%</b></div>`:''}
+        <div class="pur-list">
+          <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:7px;font-weight:700">Purchases</div>
+          ${purRows||'<div style="color:var(--muted);font-size:13px">No purchases yet.</div>'}
+        </div>
+        ${sells.length?`<div class="sell-entries">
+          <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;font-weight:700">Sell Entries</div>
+          ${sellRows}
+        </div>`:''}
+        <div class="batch-actions">
+          ${isOpen?`<button class="btn btn-sm btn-cutoff" onclick="doCutoff('${b.id}')">✂️ Cut-off</button>`:''}
+          <button class="btn btn-sm btn-green" onclick="openSellModal('${b.id}')">📤 Add Sell</button>
+          ${!isOpen?`<button class="btn btn-sm btn-ghost" onclick="setReject('${b.id}')">🔧 Reject%</button>`:''}
+          <button class="btn btn-sm btn-danger" onclick="deleteBatch('${b.id}')">🗑 Delete</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderMaisRecords(el){
+  const data=[...mais].sort((a,b)=>(b.date>a.date?1:-1));
+  if(!data.length){el.innerHTML='<div class="empty"><div class="empty-ico">🌽</div><p>No Mais income yet.</p></div>';return;}
+  const total=data.reduce((s,r)=>s+Number(r.amount),0);
+  el.innerHTML=`<div class="kpi green span2" style="margin-bottom:12px"><div class="kpi-label">Total Mais Income</div><div class="kpi-val kv-g">${fmt(total)}</div></div>`
+    +data.map(r=>`
+    <div class="recent-card">
+      <div class="recent-top">
+        <div>
+          <span class="badge badge-mais">Mais Income</span>
+          <div class="recent-meta">${fdatetime(r.date,r.time)}${r.note?' · '+r.note:''}</div>
+        </div>
+        <div class="recent-amount" style="color:var(--green)">${fmt(r.amount)}</div>
+      </div>
+      <div class="recent-actions">
+        <button class="btn btn-sm btn-danger" onclick="deleteMais('${r.id}')">🗑 Delete</button>
+      </div>
+    </div>`).join('');
+}
+
+function renderExpenseRecords(el){
+  const data=[...expenses].sort((a,b)=>(b.date>a.date?1:-1));
+  const total=data.reduce((s,e)=>s+Number(e.amount),0);
+  if(!data.length){el.innerHTML='<div class="empty"><div class="empty-ico">💸</div><p>No expenses yet.</p></div>';return;}
+  el.innerHTML=`<div class="kpi red span2" style="margin-bottom:12px"><div class="kpi-label">Total Expenses</div><div class="kpi-val kv-r">${fmt(total)}</div></div>`
+    +data.map(e=>`
+    <div class="exp-card">
+      <div>
+        <div class="exp-cat">${e.category}</div>
+        <div class="exp-desc">${e.desc||'—'}</div>
+        <div class="exp-date-txt">${fdate(e.date)}</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div class="exp-amount" style="color:var(--red)">${fmt(e.amount)}</div>
+        <button class="icon-btn" onclick="deleteExpense('${e.id}')">✕</button>
+      </div>
+    </div>`).join('');
+}
+
+function renderCapitalRecords(el){
+  const data=[...capitals].sort((a,b)=>(b.date>a.date?1:-1));
+  const total=data.reduce((s,c)=>s+Number(c.amount),0);
+  const allPurchCost=batches.reduce((s,b)=>s+batchTotals(b).cost,0);
+  const totalExp=expenses.reduce((s,e)=>s+Number(e.amount),0);
+  const remaining=total-allPurchCost-totalExp;
+  if(!data.length){el.innerHTML='<div class="empty"><div class="empty-ico">💵</div><p>No capital entries yet.</p></div>';return;}
+  el.innerHTML=`
+    <div class="kpi-grid" style="margin-bottom:12px">
+      <div class="kpi gold"><div class="kpi-label">Total Capital</div><div class="kpi-val kv-gold">${fmt(total)}</div></div>
+      <div class="kpi ${remaining>=0?'green':'red'}"><div class="kpi-label">Remaining Cash</div><div class="kpi-val ${remaining>=0?'kv-g':'kv-r'}">${fmt(remaining)}</div></div>
+    </div>`
+    +data.map(c=>`
+    <div class="exp-card">
+      <div>
+        <div class="exp-cat">Capital</div>
+        <div class="exp-desc">${c.note||'—'}</div>
+        <div class="exp-date-txt">${fdate(c.date)}</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div class="exp-amount" style="color:var(--gold)">${fmt(c.amount)}</div>
+        <button class="icon-btn" onclick="deleteCapital('${c.id}')">✕</button>
+      </div>
+    </div>`).join('');
+}
+
+function toggleBatch(id){document.getElementById('bc-'+id).classList.toggle('expanded');}
+
+// ══════════ CUT-OFF ══════════
+function doCutoff(id){
+  if(!confirm('Cut-off this batch? Next purchases will go into a new batch.'))return;
+  const b=batches.find(x=>x.id===id);
+  if(!b)return;
+  b.status='closed';b.closedAt=today();
+  persist();renderRecords();
+}
+
+// ══════════ SELL MODAL ══════════
+function openSellModal(batchId){
+  sellTargetId=batchId;
+  const b=batches.find(x=>x.id===batchId);
+  if(!b)return;
+  const{kilos}=batchTotals(b);
+  document.getElementById('sell-modal-body').innerHTML=`
+    <div style="font-size:13px;color:var(--muted);margin-bottom:12px;font-weight:600">
+      <span class="badge badge-${b.product}">${cap(b.product)}</span> Batch #${b.num} — ${fkg(kilos)} total bought
+    </div>
+    <div class="field"><label>Date Delivered</label><input type="date" id="sl-date" value="${today()}"></div>
+    <div class="field"><label>Company / Buyer</label><input type="text" id="sl-company" placeholder="e.g. San Miguel Corp"></div>
+    <div class="row2">
+      <div class="field"><label>Kilos Sold</label><input type="number" id="sl-kilos" placeholder="0" step="0.01"></div>
+      <div class="field"><label>Sell Price / kg (₱)</label><input type="number" id="sl-price" placeholder="0" step="0.01"></div>
+    </div>
+    <div class="field"><label>Reject % (whole batch)</label><input type="number" id="sl-reject" placeholder="${b.rejectPct||0}" value="${b.rejectPct||''}" step="0.1"></div>
+    <div style="font-size:11px;color:var(--muted);margin-bottom:12px;font-weight:600">Setting reject % updates the batch profit calculation.</div>
+    <button class="btn btn-primary btn-full" onclick="saveSell()">SAVE SELL ENTRY</button>`;
+  document.getElementById('modal-sell').classList.add('open');
+}
+function saveSell(){
+  const b=batches.find(x=>x.id===sellTargetId);if(!b)return;
+  const date     =document.getElementById('sl-date').value;
+  const company  =document.getElementById('sl-company').value.trim();
+  const kilos    =parseFloat(document.getElementById('sl-kilos').value)||0;
+  const pricePerKg=parseFloat(document.getElementById('sl-price').value);
+  const reject   =document.getElementById('sl-reject').value;
+  if(!date||!pricePerKg){alert('Please fill in Date and Sell Price.');return;}
+  if(!b.sells)b.sells=[];
+  b.sells.push({id:uid(),date,company,kilos,pricePerKg});
+  if(reject!=='')b.rejectPct=parseFloat(reject);
+  persist();closeModal('modal-sell');renderRecords();renderOverview();
+}
+
+// ══════════ SET REJECT ══════════
+function setReject(id){
+  const b=batches.find(x=>x.id===id);if(!b)return;
+  const v=prompt('Reject % for '+cap(b.product)+' Batch #'+b.num+':',b.rejectPct||'0');
+  if(v===null)return;
+  b.rejectPct=parseFloat(v)||0;
+  persist();renderRecords();
+}
+
+// ══════════ DELETE ══════════
+function deletePurchase(bId,pId){
+  if(!confirm('Remove this purchase?'))return;
+  const b=batches.find(x=>x.id===bId);if(!b)return;
+  b.purchases=b.purchases.filter(p=>p.id!==pId);
+  persist();renderRecent();renderRecords();renderOverview();
+}
+function deleteSell(bId,sId){
+  if(!confirm('Remove this sell entry?'))return;
+  const b=batches.find(x=>x.id===bId);if(!b)return;
+  b.sells=b.sells.filter(s=>s.id!==sId);
+  persist();renderRecords();renderOverview();
+}
+function deleteBatch(id){
+  if(!confirm('Delete this entire batch and all its purchases?'))return;
+  batches=batches.filter(b=>b.id!==id);
+  persist();renderRecords();renderOverview();
+}
+function deleteMais(id){
+  if(!confirm('Delete this income entry?'))return;
+  mais=mais.filter(r=>r.id!==id);
+  persist();renderRecent();renderRecords();renderOverview();
+}
+function deleteExpense(id){
+  if(!confirm('Delete this expense?'))return;
+  expenses=expenses.filter(e=>e.id!==id);
+  persist();renderRecent();renderRecords();renderOverview();
+}
+function deleteCapital(id){
+  if(!confirm('Remove this capital entry?'))return;
+  capitals=capitals.filter(c=>c.id!==id);
+  persist();renderRecords();renderOverview();
+}
+
+// ══════════ DAILY REPORT ══════════
+function openReport(){
+  document.getElementById('report-date').value=today();
+  document.getElementById('modal-report').classList.add('open');
+  renderReport();
+}
+function renderReport(){
+  const d=document.getElementById('report-date').value;if(!d)return;
+  const rb=document.getElementById('report-body');
+
+  const dayPurchases=[];
+  batches.forEach(b=>b.purchases.filter(p=>p.date===d).forEach(p=>{
+    dayPurchases.push({product:cap(b.product),batch:'#'+b.num,supplier:p.supplier||'—',kilos:p.kilos,price:p.price,total:p.kilos*p.price,time:p.time||''});
+  }));
+  const daySells=[];
+  batches.forEach(b=>(b.sells||[]).filter(s=>s.date===d).forEach(s=>{
+    daySells.push({product:cap(b.product),batch:'#'+b.num,company:s.company||'—',kilos:s.kilos||0,pricePerKg:s.pricePerKg});
+  }));
+  const dayMais    =mais.filter(r=>r.date===d);
+  const dayExp     =expenses.filter(e=>e.date===d);
+  const dayCap     =capitals.filter(c=>c.date===d);
+
+  const totalPurchCost =dayPurchases.reduce((s,p)=>s+p.total,0);
+  const totalExpAmt    =dayExp.reduce((s,e)=>s+Number(e.amount),0);
+  const totalCapAdded  =dayCap.reduce((s,c)=>s+Number(c.amount),0);
+  const totalSellRev   =daySells.reduce((s,sl)=>s+sl.kilos*sl.pricePerKg,0);
+  const totalMaisInc   =dayMais.reduce((s,r)=>s+Number(r.amount),0);
+  const totalRevenue   =totalSellRev+totalMaisInc;
+  const net=totalRevenue-totalPurchCost-totalExpAmt;
+
+  const noData=!dayPurchases.length&&!daySells.length&&!dayMais.length&&!dayExp.length&&!dayCap.length;
+  if(noData){rb.innerHTML=`<div class="empty"><div class="empty-ico">📭</div><p>No transactions for ${fdate(d)}.</p></div>`;return;}
+
+  const purTable=dayPurchases.length?`
+    <table class="report-table"><thead><tr>
+      <th>Product</th><th>Batch</th><th>Supplier</th><th>Time</th><th>Kilos</th><th>₱/kg</th><th>Total Out</th>
+    </tr></thead><tbody>
+      ${dayPurchases.map(p=>`<tr>
+        <td><span class="badge badge-${p.product.toLowerCase()}">${p.product}</span></td>
+        <td>${p.batch}</td><td>${p.supplier}</td><td>${p.time||'—'}</td>
+        <td class="num">${fkg(p.kilos)}</td><td class="num">${fmt(p.price)}</td><td class="num">${fmt(p.total)}</td>
+      </tr>`).join('')}
+      <tr class="report-total-row"><td colspan="4"><b>TOTAL</b></td>
+        <td class="num"><b>${fkg(dayPurchases.reduce((s,p)=>s+p.kilos,0))}</b></td>
+        <td></td><td class="num"><b>${fmt(totalPurchCost)}</b></td>
+      </tr>
+    </tbody></table>`:'<div style="color:var(--muted);font-size:13px;padding:4px 0;font-weight:600">No purchases this date.</div>';
+
+  const sellTable=(daySells.length||dayMais.length)?`
+    <table class="report-table"><thead><tr><th>Type</th><th>Buyer/Note</th><th>Kilos</th><th>₱/kg</th><th>Revenue In</th></tr></thead><tbody>
+      ${daySells.map(s=>`<tr>
+        <td><span class="badge badge-${s.product.toLowerCase()}">${s.product}</span></td>
+        <td>${s.company}</td><td class="num">${s.kilos?fkg(s.kilos):'—'}</td>
+        <td class="num">${fmt(s.pricePerKg)}</td><td class="num">${fmt(s.kilos*s.pricePerKg)}</td>
+      </tr>`).join('')}
+      ${dayMais.map(r=>`<tr>
+        <td><span class="badge badge-mais">Mais</span></td>
+        <td>${r.note||'—'}</td><td class="num">—</td><td class="num">Service</td>
+        <td class="num" style="color:var(--green)">${fmt(r.amount)}</td>
+      </tr>`).join('')}
+      <tr class="report-total-row"><td colspan="4"><b>TOTAL REVENUE</b></td><td class="num"><b>${fmt(totalRevenue)}</b></td></tr>
+    </tbody></table>`:'<div style="color:var(--muted);font-size:13px;padding:4px 0;font-weight:600">No sales this date.</div>';
+
+  const expTable=dayExp.length?`
+    <table class="report-table"><thead><tr><th>Category</th><th>Description</th><th>Amount Out</th></tr></thead><tbody>
+      ${dayExp.map(e=>`<tr><td>${e.category}</td><td>${e.desc||'—'}</td><td class="num">${fmt(e.amount)}</td></tr>`).join('')}
+      <tr class="report-total-row"><td colspan="2"><b>TOTAL</b></td><td class="num"><b>${fmt(totalExpAmt)}</b></td></tr>
+    </tbody></table>`:'<div style="color:var(--muted);font-size:13px;padding:4px 0;font-weight:600">No expenses this date.</div>';
+
+  rb.innerHTML=`
+    <div class="report-summary-grid">
+      <div class="rscard" style="background:var(--gold-d);border-color:var(--gold-b)"><div class="rscard-l">💵 Capital Added</div><div class="rscard-v" style="color:var(--gold)">${fmt(totalCapAdded)}</div></div>
+      <div class="rscard"><div class="rscard-l">💰 Purchases Out</div><div class="rscard-v" style="color:var(--red)">${fmt(totalPurchCost)}</div></div>
+      <div class="rscard"><div class="rscard-l">💸 Expenses Out</div><div class="rscard-v" style="color:var(--red)">${fmt(totalExpAmt)}</div></div>
+      <div class="rscard"><div class="rscard-l">📤 Revenue In</div><div class="rscard-v" style="color:var(--green)">${fmt(totalRevenue)}</div></div>
+      <div class="rscard" style="grid-column:1/-1;${net>=0?'background:var(--green-d);border-color:var(--green-b)':'background:var(--red-d);border-color:var(--red-b)'}">
+        <div class="rscard-l">📊 Net (Revenue − Purchases − Expenses)</div>
+        <div class="rscard-v" style="color:${net>=0?'var(--green)':'var(--red)'}">${fmt(net)}</div>
+      </div>
+    </div>
+    ${dayCap.length?`<div class="report-section"><div class="report-section-title">💵 Capital Added</div>
+      <table class="report-table"><thead><tr><th>Date</th><th>Note</th><th>Amount</th></tr></thead><tbody>
+        ${dayCap.map(c=>`<tr><td>${fdate(c.date)}</td><td>${c.note||'—'}</td><td class="num">${fmt(c.amount)}</td></tr>`).join('')}
+        <tr class="report-total-row"><td colspan="2"><b>TOTAL</b></td><td class="num"><b>${fmt(totalCapAdded)}</b></td></tr>
+      </tbody></table></div>`:''}
+    <div class="report-section"><div class="report-section-title">📥 Purchases — Money Out</div>${purTable}</div>
+    <div class="report-section"><div class="report-section-title">📤 Sales & Income — Money In</div>${sellTable}</div>
+    <div class="report-section"><div class="report-section-title">💸 Expenses — Money Out</div>${expTable}</div>
+    <button class="btn btn-ghost btn-full" style="margin-top:8px" onclick="window.print()">🖨️ Print / Save as PDF</button>`;
+}
+
+// ══════════ MODALS ══════════
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+function closeOverlay(e,id){if(e.target===document.getElementById(id))closeModal(id);}
+
+// ══════════ INIT ══════════
+function init(){
+  document.getElementById('hdr-date').textContent=
+    new Date().toLocaleDateString('en-PH',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
+  document.getElementById('p-date').value=today();
+  document.getElementById('m-date').value=today();
+  document.getElementById('c-date').value=today();
+  document.getElementById('e-date').value=today();
+  hydrate();
+
+  // Restore last selected product and trigger price memory
+  const lastProd=localStorage.getItem('km4_last_product');
+  if(lastProd){
+    document.getElementById('p-product').value=lastProd;
+    onProductChange();
+  }
+  renderOverview();
+  renderRecent();
+}
+init();
 </script>
 </body>
 </html>
