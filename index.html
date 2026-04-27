@@ -236,12 +236,16 @@ hr.div{border:none;border-top:1px solid var(--border);margin:11px 0}
 
 <!-- ══════════════════════ OVERVIEW ══════════════════════ -->
 <div class="view active" id="view-overview">
-  <div class="pills" id="period-pills">
-    <div class="pill active" onclick="setPeriod('all',this)">All Time</div>
-    <div class="pill" onclick="setPeriod('today',this)">Today</div>
-    <div class="pill" onclick="setPeriod('week',this)">This Week</div>
-    <div class="pill" onclick="setPeriod('month',this)">This Month</div>
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:11px;gap:8px">
+    <div class="pills" id="period-pills" style="margin-bottom:0;flex:1">
+      <div class="pill" onclick="setPeriod('all',this)">All Time</div>
+      <div class="pill active" onclick="setPeriod('today',this)">Today</div>
+      <div class="pill" onclick="setPeriod('week',this)">This Week</div>
+      <div class="pill" onclick="setPeriod('month',this)">This Month</div>
+    </div>
+    <button class="btn" style="background:var(--green-d);color:var(--green);border:1.5px solid var(--green-b);white-space:nowrap;font-size:12px;padding:6px 12px;flex-shrink:0" onclick="startNewDay()">🌅 New Day</button>
   </div>
+  <div id="new-day-banner" style="display:none;background:var(--green-d);border:1px solid var(--green-b);border-radius:var(--rsm);padding:9px 13px;font-size:12px;font-weight:700;color:var(--green);margin-bottom:11px;text-align:center"></div>
   <div class="kpi-grid" id="dash-kpis"></div>
   <div class="sec">Breakdown by Product</div>
   <div id="dash-products"></div>
@@ -332,8 +336,15 @@ hr.div{border:none;border-top:1px solid var(--border);margin:11px 0}
       <div class="field"><label>Date</label><input type="date" id="e-date"></div>
     </div>
     <div class="field"><label>Description</label><input type="text" id="e-desc" placeholder="e.g. Sweldo ni Mang Ben"></div>
-    <div class="field"><label>Amount (₱) — supports math e.g. 250*5</label>
-      <input type="text" inputmode="decimal" id="e-amount" placeholder="e.g. 250*5 or 1500" oninput="evalExpense()">
+    <div class="field">
+      <label>Amount (₱)</label>
+      <input type="number" inputmode="numeric" id="e-amount-num" placeholder="0" step="0.01" oninput="syncExpenseNum()" style="margin-bottom:6px">
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
+        <div style="height:1px;flex:1;background:var(--border)"></div>
+        <span style="font-size:10px;color:var(--muted);font-weight:700">OR USE FORMULA</span>
+        <div style="height:1px;flex:1;background:var(--border)"></div>
+      </div>
+      <input type="text" inputmode="text" id="e-amount" placeholder="e.g. 250*5 or 300+150" oninput="evalExpense(); syncExpenseFormula()" style="font-family:'Courier New',monospace;font-size:13px">
     </div>
     <div class="calc-result" id="e-calc-result"></div>
     <button class="btn btn-full" style="background:var(--red-d);color:var(--red);border:1.5px solid var(--red-b)" onclick="saveExpense()">SAVE EXPENSE</button>
@@ -787,14 +798,14 @@ function saveExpense(){
   const cat   =document.getElementById('e-cat').value;
   const date  =document.getElementById('e-date').value;
   const desc  =document.getElementById('e-desc').value.trim();
-  const raw   =document.getElementById('e-amount').value.trim();
-  const amount=evalExpr(raw);
+  const amount=resolveExpenseAmount();
   if(!cat||!date||isNaN(amount)||amount<=0){alert('Please fill in Category, Date, and a valid Amount.');return;}
   expenses.push({id:uid(),category:cat,date,desc,amount});
   persist();
   document.getElementById('e-cat').value='';
   document.getElementById('e-date').value=today();
   document.getElementById('e-desc').value='';
+  document.getElementById('e-amount-num').value='';
   document.getElementById('e-amount').value='';
   document.getElementById('e-calc-result').classList.remove('show','err');
   alert('✅ Expense saved!');
@@ -807,7 +818,8 @@ function renderRecent(){
   // Recent purchases — last 5 across all batches
   const allPurchases=[];
   batches.forEach(b=>b.purchases.forEach(p=>allPurchases.push({...p,batchId:b.id,batchNum:b.num,product:b.product,batchOpen:b.status==='open'})));
-  allPurchases.sort((a,b)=>((b.date+b.time||'')>(a.date+a.time||''))?1:-1);
+  // Sort by uid which encodes insertion timestamp — most recently added first
+  allPurchases.sort((a,b)=>{ const ta=parseInt(a.id,36)||0; const tb=parseInt(b.id,36)||0; return tb-ta; });
   const rp=document.getElementById('recent-purchases');
   if(!allPurchases.length){rp.innerHTML='<div class="empty" style="padding:20px"><div class="empty-ico">📭</div><p>No purchases yet.</p></div>';return;}
   rp.innerHTML=allPurchases.slice(0,5).map(p=>`
@@ -1204,6 +1216,37 @@ function renderReport(){
 function closeModal(id){document.getElementById(id).classList.remove('open');}
 function closeOverlay(e,id){if(e.target===document.getElementById(id))closeModal(id);}
 
+// ══════════ NEW DAY ══════════
+function startNewDay(){
+  // Just switch Overview to Today filter and show a banner
+  periodFilter='today';
+  document.querySelectorAll('#period-pills .pill').forEach((el,i)=>el.classList.toggle('active',i===1));
+  const banner=document.getElementById('new-day-banner');
+  banner.textContent='🌅 New day started — showing today\'s activity only. All historical data is safe in Records.';
+  banner.style.display='block';
+  setTimeout(()=>{ banner.style.display='none'; },5000);
+  renderOverview();
+}
+
+// ══════════ EXPENSE DUAL-INPUT SYNC ══════════
+function syncExpenseNum(){
+  // When number field changes, clear formula field
+  const num=document.getElementById('e-amount-num').value;
+  if(num) document.getElementById('e-amount').value='';
+  document.getElementById('e-calc-result').classList.remove('show','err');
+}
+function syncExpenseFormula(){
+  // When formula field has content, clear number field
+  const formula=document.getElementById('e-amount').value.trim();
+  if(formula) document.getElementById('e-amount-num').value='';
+}
+function resolveExpenseAmount(){
+  const num=parseFloat(document.getElementById('e-amount-num').value);
+  if(!isNaN(num)&&num>0) return num;
+  const formula=document.getElementById('e-amount').value.trim();
+  return evalExpr(formula);
+}
+
 // ══════════ INIT ══════════
 function init(){
   document.getElementById('hdr-date').textContent=
@@ -1213,6 +1256,9 @@ function init(){
   document.getElementById('c-date').value=today();
   document.getElementById('e-date').value=today();
   hydrate();
+
+  // Default to today filter
+  periodFilter='today';
 
   // Restore last selected product and trigger price memory
   const lastProd=localStorage.getItem('km4_last_product');
